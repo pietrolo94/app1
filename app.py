@@ -13,7 +13,7 @@ def add_bg_from_url():
          f"""
          <style>
          .stApp {{
-             background-image: url("https://cuad.ask.fm/b10/18b0a/c7b2/4670/af01/47b515778a99/normal/560368.png");
+             background-image: url("https://cdn.pixabay.com/photo/2019/04/24/11/27/flowers-4151900_960_720.jpg");
              background-attachment: fixed;
              background-size: cover
          }}
@@ -31,7 +31,7 @@ def formula_di_erone(a,b,c):
         return None
 
 def main():
-    st.title('Molla Chi Boia')
+
     st.latex(r'''
         a + ar + a r^2 + a r^3 + \cdots + a r^{n-1} =
         \sum_{k=0}^{n-1} ar^k =
@@ -55,7 +55,6 @@ def main():
         st.write(f"l'area del triangolo è {area}")
     else:
         "non hai inserito i segmenti di un triangolo"
-
     add_bg_from_url()
     
     
