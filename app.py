@@ -6,7 +6,7 @@ def add_bg_from_url():
          f"""
          <style>
          .stApp {{
-             background-image: url("https://cdn.pixabay.com/photo/2019/04/24/11/27/flowers-4151900_960_720.jpg");
+             background-image: url("https://us.123rf.com/450wm/inkdrop/inkdrop2301/inkdrop230100605/197198582-simpatico-coniglietto-di-pasqua-all-interno-di-un-uovo-incrinato-ai-generativo.jpg?ver=6");
              background-attachment: fixed;
              background-size: cover
          }}
@@ -25,23 +25,30 @@ def child_camp_form():
     gender = st.sidebar.radio("Sesso", ["Maschio", "Femmina", "Altro"])
     
     # Barra laterale per inserire l'età del bambino
-    age = st.sidebar.number_input("Età", min_value=5, max_value=17, step=1)
+    age = st.sidebar.number_input("Età", min_value=3, max_value=11, step=1)
     
     # Barra laterale per selezionare eventuali allergie
     allergies = st.sidebar.multiselect("Allergie", ["Arachidi", "Latticini", "Glutine", "Altro"])
     
     # Barra laterale per selezionare le attività preferite del bambino
-    activities = st.sidebar.multiselect("Attività preferite", ["Calcio", "Basket", "Pallavolo", "Arte", "Teatro", "Musica", "Altro"])
+    school = st.sidebar.multiselect("Scuola frequentata", ["Nido", "Materna", "Elementari", "Niente", "Altro"])
     
-    # Barra laterale per inserire eventuali note
+    # Barra laterale per inserire mail
+    email = st.sidebar.text_area("Email", max_chars=50)
+
+    #Barra laterale per inserire numero emergenza
+    telephone = st.sidebar.text_input("Numero di emergenza",max_chars=10 )
+
     notes = st.sidebar.text_area("Note aggiuntive", max_chars=256)
-    
+
     st.write(f"## Nome bimbo: {child_name}")
     st.write(f"### Informazioni di base")
     st.write(f"Genere: {gender}")
     st.write(f"Età: {age}")
     st.write(f"Allergie: {', '.join(allergies)}")
-    st.write(f"Attività preferite: {', '.join(activities)}")
+    st.write(f"Scuola: {', '.join(school)}")
+    st.write(f"Email: {email}")
+    st.write(f"Numero di emergenza: {telephone}")
     st.write(f"Note aggiuntive: {notes}")
     
     # Creazione di un dizionario con i dati del bambino
@@ -50,7 +57,9 @@ def child_camp_form():
         "Genere": gender,
         "Età": age,
         "Allergie": ', '.join(allergies),
-        "Attività preferite": ', '.join(activities),
+        "Attività preferite": ', '.join(school),
+        "Email": ','.join(email),
+        "Numero di emergenza": ','.join(telephone),
         "Note aggiuntive": notes
     }
     
