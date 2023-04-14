@@ -30,13 +30,8 @@ def formula_di_erone(a,b,c):
     else:
         return None
 
-def upload_video():
-    video = st.file_uploader("gian.modificato.mp4", type=["mp4"])
-    if video is not None:
-        st.video(video)
-
 def main():
-
+    st.title('Molla Chi Boia')
     st.latex(r'''
         a + ar + a r^2 + a r^3 + \cdots + a r^{n-1} =
         \sum_{k=0}^{n-1} ar^k =
@@ -60,7 +55,7 @@ def main():
         st.write(f"l'area del triangolo è {area}")
     else:
         "non hai inserito i segmenti di un triangolo"
-        
+
     add_bg_from_url()
     
     
