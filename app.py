@@ -1,11 +1,5 @@
-from funzioni import somma_due_numeri
 import streamlit as st
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt 
-from numpy.random import rand
 import math
-from streamlit.components.v1 import components
 
 def area_triangolo(a,b):
     '''questa funzione calcola area di un triangolo con base e altezza'''
