@@ -5,6 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt 
 from numpy.random import rand
 import math
+from streamlit.components.v1 import components
 
 def area_triangolo(a,b):
     '''questa funzione calcola area di un triangolo con base e altezza'''
@@ -34,6 +35,11 @@ def formula_di_erone(a,b,c):
         return area
     else:
         return None
+
+def upload_video():
+    video = st.file_uploader("gian.modificato.mp4", type=["mp4"])
+    if video is not None:
+        st.video(video)
 
 def main():
 
@@ -69,12 +75,10 @@ def main():
     df = pd.read_csv(dataset_path, header=None, names=["sepal_length", "sepal_width", "petal_length", "petal_width", "class"])
     st.dataframe(df)
 
-    file = st.file_uploader("Upload a video", type=["mp4"])
+    video_file = open('gianmodificato.mp4', 'rb').read()
+    st.video(video_file)
 
-    if file is not None:
-        video = file.read()
-        st.video(video)
-
+    
 if __name__ == "__main__":
     main()
 
