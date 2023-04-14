@@ -68,16 +68,6 @@ def main():
         "non hai inserito i segmenti di un triangolo"
     
 
-    st.title("Data Transformation")
-
-    dataset_path='https://frenzy86.s3.eu-west-2.amazonaws.com/fav/iris.data'
-
-    df = pd.read_csv(dataset_path, header=None, names=["sepal_length", "sepal_width", "petal_length", "petal_width", "class"])
-    st.dataframe(df)
-
-    video_file = open('gianmodificato.mp4', 'rb').read()
-    st.video(video_file)
-
     
 if __name__ == "__main__":
     main()
