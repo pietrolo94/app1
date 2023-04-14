@@ -4,4 +4,3 @@ numpy
 matplotlib
 math
 xlsxwriter
-streamlit.components.v1
