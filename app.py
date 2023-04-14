@@ -1,5 +1,10 @@
 from funzioni import somma_due_numeri
 import streamlit as st
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt 
+from numpy.random import rand
+import math
 
 def area_triangolo(a,b):
     '''questa funzione calcola area di un triangolo con base e altezza'''
@@ -22,6 +27,13 @@ def add_bg_from_url():
          unsafe_allow_html=True
      )
 
+def formula_di_erone(a,b,c):
+    if a<(b+c) and b<(a+c) and c<(a+b):
+        p=(a+b+c)/2
+        area=math.sqrt(p*(p-a)*(p-b)*(p-c))
+        return area
+    else:
+        return None
 
 def main():
 
@@ -40,11 +52,29 @@ def main():
         st.write(f"l'area del triangolo è {area}")
 
 
-    input = st.number_input("inserisci base", 0)
-    input1 = st.number_input("inserisci altezza", 0)
-    st.write(area_triangolo(input,input1))
+    input = st.number_input("inserisci lato 1", 0.0)
+    input1 = st.number_input("inserisci lato 2", 0.0)
+    input2 = st.number_input("inserisci lato 3",0.0)
+    area = formula_di_erone(input,input1,input2)
+    if area != None:
+        st.write(f"l'area del triangolo è {area}")
+    else:
+        "non hai inserito i segmenti di un triangolo"
+    
 
-    add_bg_from_url()
+    st.title("Data Transformation")
+
+    dataset_path='https://frenzy86.s3.eu-west-2.amazonaws.com/fav/iris.data'
+
+    df = pd.read_csv(dataset_path, header=None, names=["sepal_length", "sepal_width", "petal_length", "petal_width", "class"])
+    st.dataframe(df)
+
+    file = st.file_uploader("Upload a video", type=["mp4"])
+
+    if file is not None:
+        video = file.read()
+        st.video(video)
+
 if __name__ == "__main__":
     main()
 
