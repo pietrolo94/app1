@@ -1,6 +1,20 @@
 import streamlit as st
 import pandas as pd
 
+def add_bg_from_url():
+    st.markdown(
+         f"""
+         <style>
+         .stApp {{
+             background-image: url("https://cdn.pixabay.com/photo/2019/04/24/11/27/flowers-4151900_960_720.jpg");
+             background-attachment: fixed;
+             background-size: cover
+         }}
+         </style>
+         """,
+         unsafe_allow_html=True
+     )
+
 def child_camp_form():
     st.write("---")
     
@@ -22,8 +36,7 @@ def child_camp_form():
     # Barra laterale per inserire eventuali note
     notes = st.sidebar.text_area("Note aggiuntive", max_chars=256)
     
-    st.write("# Form di registrazione per il campo estivo")
-    st.write(f"## Bambino: {child_name}")
+    st.write(f"## Nome bimbo: {child_name}")
     st.write(f"### Informazioni di base")
     st.write(f"Genere: {gender}")
     st.write(f"Età: {age}")
@@ -49,7 +62,7 @@ def main():
     df = pd.DataFrame(columns=["Nome Bambino", "Genere", "Età", "Allergie", "Attività preferite", "Note aggiuntive"])
     
     # Titolo dell'app
-    st.title("Registrazione per campo estivo")
+    st.title("Registrazione bimbi Palaminchia")
     
     # Creazione del modulo di registrazione
     child_data = child_camp_form()
@@ -62,6 +75,7 @@ def main():
         df.to_csv("bambini_campo_estivo.csv", index=False)
         st.success("Dati salvati correttamente!")
 
+    add_bg_from_url()
 
 if __name__ == "__main__":
     main()
