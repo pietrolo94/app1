@@ -6,7 +6,7 @@ def add_bg_from_url():
          f"""
          <style>
          .stApp {{
-             background-image: url("https://us.123rf.com/450wm/inkdrop/inkdrop2301/inkdrop230100605/197198582-simpatico-coniglietto-di-pasqua-all-interno-di-un-uovo-incrinato-ai-generativo.jpg?ver=6");
+             background-image: url("https://cdn.pixabay.com/photo/2019/04/24/11/27/flowers-4151900_960_720.jpg");
              background-attachment: fixed;
              background-size: cover
          }}
