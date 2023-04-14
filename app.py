@@ -1,63 +1,68 @@
 import streamlit as st
-import math
+import pandas as pd
 
-def area_triangolo(a,b):
-    '''questa funzione calcola area di un triangolo con base e altezza'''
-    area = (a*b)/2
-    return area
-def somma_due_numeri(a,b):
-    return a+b
+def child_camp_form():
+    st.write("---")
+    
+    # Barra laterale per inserire il nome del bambino
+    child_name = st.sidebar.text_input("Nome completo del bambino")
+    
+    # Barra laterale per selezionare il genere del bambino
+    gender = st.sidebar.radio("Sesso", ["Maschio", "Femmina", "Altro"])
+    
+    # Barra laterale per inserire l'età del bambino
+    age = st.sidebar.number_input("Età", min_value=5, max_value=17, step=1)
+    
+    # Barra laterale per selezionare eventuali allergie
+    allergies = st.sidebar.multiselect("Allergie", ["Arachidi", "Latticini", "Glutine", "Altro"])
+    
+    # Barra laterale per selezionare le attività preferite del bambino
+    activities = st.sidebar.multiselect("Attività preferite", ["Calcio", "Basket", "Pallavolo", "Arte", "Teatro", "Musica", "Altro"])
+    
+    # Barra laterale per inserire eventuali note
+    notes = st.sidebar.text_area("Note aggiuntive", max_chars=256)
+    
+    st.write("# Form di registrazione per il campo estivo")
+    st.write(f"## Bambino: {child_name}")
+    st.write(f"### Informazioni di base")
+    st.write(f"Genere: {gender}")
+    st.write(f"Età: {age}")
+    st.write(f"Allergie: {', '.join(allergies)}")
+    st.write(f"Attività preferite: {', '.join(activities)}")
+    st.write(f"Note aggiuntive: {notes}")
+    
+    # Creazione di un dizionario con i dati del bambino
+    child_data = {
+        "Nome Bambino": child_name,
+        "Genere": gender,
+        "Età": age,
+        "Allergie": ', '.join(allergies),
+        "Attività preferite": ', '.join(activities),
+        "Note aggiuntive": notes
+    }
+    
+    return child_data
 
-def add_bg_from_url():
-    st.markdown(
-         f"""
-         <style>
-         .stApp {{
-             background-image: url("https://cdn.pixabay.com/photo/2019/04/24/11/27/flowers-4151900_960_720.jpg");
-             background-attachment: fixed;
-             background-size: cover
-         }}
-         </style>
-         """,
-         unsafe_allow_html=True
-     )
-
-def formula_di_erone(a,b,c):
-    if a<(b+c) and b<(a+c) and c<(a+b):
-        p=(a+b+c)/2
-        area=math.sqrt(p*(p-a)*(p-b)*(p-c))
-        return area
-    else:
-        return None
 
 def main():
-
-    st.latex(r'''
-        a + ar + a r^2 + a r^3 + \cdots + a r^{n-1} =
-        \sum_{k=0}^{n-1} ar^k =
-        a \left(\frac{1-r^{n}}{1-r}\right)
-        ''')
+    # Creazione del DataFrame vuoto
+    df = pd.DataFrame(columns=["Nome Bambino", "Genere", "Età", "Allergie", "Attività preferite", "Note aggiuntive"])
     
-    x1 = st.slider('Please inserisci base', 0, 100, 25)
-    x2 = st.slider('Please inserisci altezza', 0, 100, 35)
+    # Titolo dell'app
+    st.title("Registrazione per campo estivo")
     
-    if st.button('calcola area triancolo', help="Click here"):
-
-        area=area_triangolo(x1,x2)
-        st.write(f"l'area del triangolo è {area}")
-
-
-    input = st.number_input("inserisci lato 1", 0.0)
-    input1 = st.number_input("inserisci lato 2", 0.0)
-    input2 = st.number_input("inserisci lato 3",0.0)
-    area = formula_di_erone(input,input1,input2)
-    if area != None:
-        st.write(f"l'area del triangolo è {area}")
-    else:
-        "non hai inserito i segmenti di un triangolo"
-    add_bg_from_url()
+    # Creazione del modulo di registrazione
+    child_data = child_camp_form()
     
+    # Aggiunta dei dati del bambino al DataFrame
+    df = df.append(child_data, ignore_index=True)
     
-if __name__ == "__main__":
+    # Bottone per salvare i dati
+    if st.button("Salva dati"):
+        df.to_csv("bambini_campo_estivo.csv", index=False)
+        st.success("Dati salvati correttamente!")
+
+
+if _name_ == "_main_":
     main()
 
