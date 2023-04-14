@@ -13,7 +13,7 @@ def add_bg_from_url():
          f"""
          <style>
          .stApp {{
-             background-image: url("https://www.artemedialab.it/wp-content/uploads/2019/04/immagini-sfondo-1.jpg");
+             background-image: url("https://cuad.ask.fm/b10/18b0a/c7b2/4670/af01/47b515778a99/normal/560368.png");
              background-attachment: fixed;
              background-size: cover
          }}
@@ -60,8 +60,9 @@ def main():
         st.write(f"l'area del triangolo è {area}")
     else:
         "non hai inserito i segmenti di un triangolo"
+        
+    add_bg_from_url()
     
-
     
 if __name__ == "__main__":
     main()
