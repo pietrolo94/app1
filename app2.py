@@ -19,7 +19,7 @@ def add_row_to_csv(csv_path, df):
     existing_df = pd.read_csv(csv_path)
     
     # Aggiungi il nuovo dataframe come riga al dataframe esistente
-    updated_df = existing_df.append(df, ignore_index=True)
+    updated_df = pd.concat([existing_df, df], ignore_index=True)
     
     # Scrivi il dataframe aggiornato sul file csv
     updated_df.to_csv(csv_path, index=False)    
@@ -27,7 +27,7 @@ def add_row_to_csv(csv_path, df):
 def main():
     
     # Titolo del form
-    st.title("Registrazione")
+    st.title("**Registrazione** :red[MongolCamp] :sunglasses:")
 
     # Campo nome
     nome = st.text_input("Nome")
@@ -80,6 +80,6 @@ def main():
         # mostrare un messaggio di conferma
         st.success("Dati registrati con successo nel file CSV!")
     add_bg_from_url()
-    
+
 if __name__ == "__main__":
     main()
