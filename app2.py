@@ -16,7 +16,8 @@ def main():
     
     # Titolo del form
     st.title("**Registrazione** :red[MongolCamp] :sunglasses:")
-
+    #Anagrafica
+    st.subheader('Anagrafica')
     col9, col10 = st.columns(2)
     # Campo nome
     with col9:
@@ -69,7 +70,10 @@ def main():
 
     # Campo allergie
     allergie = st.text_input("Allergie")
-
+    
+    #Recapiti
+    st.subheader('Recapiti')
+    
     # Campo telefono di emergenza
     col11, col12 =st.columns(2)
     with col11:
@@ -80,30 +84,39 @@ def main():
 
     # Campo email
     email = st.text_input("Email")
-    
-    #Autorizzazione foto
-    foto = st.selectbox("Autorizzazione Foto", ["si", "no"])
 
-    #campo giorni
-    # Creiamo 4 colonne utilizzando st.beta_columns()
+    #Indirizzo
+    col16, col17, col18=st.columns(3)
+    with col16:
+        via=st.text_input("Indirizzo")
+    with col17:
+        cap=st.text_input("Cap")
+    with col18:
+        comune=st.text_input("Comune")
+    #Autorizzazioni
     
     #Ritiro bimbi
-    st.subheader('Autorizzazione ritiro')
-    col13, col14=st.columns(2)
+    st.subheader('Autorizzazioni')
+    col13, col14, col15=st.columns(3)
     with col13:
         ritiro = st.text_input("Nome e cognome persone autorizzate")
     with col14:
         parente= st.text_input("Legame Parentale")
+    #autorizzazione foto
+    with col15:
+        foto = st.selectbox("Autorizzazione Foto", ["si", "no"])
+
     # NOME DEL FILE CSV
     FILENAME = 'registrazione.csv'
 
     # VERIFICA SE IL FILE ESISTE
     if not os.path.exists(FILENAME):
         # CREA UN DATAFRAME VUOTO
-        df = pd.DataFrame(columns=['Nome', 'Cognome', 'Età', 'Sesso',
+        df = pd.DataFrame(columns=['Nome', 'Cognome', 'Eta', 'Sesso',
                 'Classe', 'Quota pagata',
                 'Allergie','Intolleranze', 'Email','Foto'
                 'Telefono1','Telefono2',
+                'via','cap','comune',
                 'Giorno1','Pranzo giorno1',
                 'Giorno2','Pranzo giorno2',
                 'Giorno3','Pranzo giorno3',
@@ -118,10 +131,11 @@ def main():
     # aggiungere un pulsante per salvare i dati in un file CSV
     if st.button("Salva dati"):
         # creare un dataframe con i dati inseriti
-        data = {'Nome': [nome], 'Cognome':[cognome], 'Età':[age], 'Sesso':[sesso],
+        data = {'Nome': [nome], 'Cognome':[cognome], 'Eta':[age], 'Sesso':[sesso],
                 'Classe':[classe], 'Quota pagata':[quota],
                 'Intolleranze':[intolleranze],'Allergie':[allergie], 'Email': [email],'Foto':[foto],
                 'Telefono1': [telefono1],'Telefono2':[telefono2],
+                'Indirizzo':[via],'Cap':[cap],'Comune':[comune],
                 'Giorno1':giorno1,'Pranzo giorno1':[pranzo1],
                 'Giorno2':giorno2,'Pranzo giorno2':[pranzo2],
                 'Giorno3':giorno3,'Pranzo giorno3':[pranzo3],
