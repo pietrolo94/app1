@@ -141,7 +141,8 @@ def main():
                 'Giorno4':giorno4,'Pranzo giorno4':pranzo4,
                 'Ritiro bimbo':ritiro,'Parentela':parente
                 }
-        df = pd.append(data)
+        nuova_riga = pd.DataFrame(data, index=[0])
+        df = df.append(nuova_riga, ignore_index=True)
         st.write(df)
 if __name__ == "__main__":
     main()
