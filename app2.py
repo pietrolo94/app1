@@ -141,9 +141,9 @@ def main():
                 'Giorno4':giorno4,'Pranzo giorno4':pranzo4,
                 'Ritiro bimbo':ritiro,'Parentela':parente
                 }
-        df = pd.DataFrame(data)
+        df1 = pd.DataFrame(data)
         # salvare il dataframe in un file CSV
-        add_row_to_csv("iscrizione.csv", df)
+        add_row_to_csv("iscrizione.csv", df1)
         # mostrare un messaggio di conferma
         st.success("Dati registrati con successo nel file CSV!")
 
