@@ -16,7 +16,7 @@ def aggiungi_riga(df,nome,cognome,age,sesso,classe,quota,intolleranze,allergie,e
                 'Ritiro bimbo':ritiro,'Parentela':parente
                 ,}
     nuova_riga=pd.DataFrame(data, index=[0])
-    df = df.append(df, nuova_riga, ignore_index=True)
+    df = df.append(nuova_riga, ignore_index=True)
     return df
 
 def main():
