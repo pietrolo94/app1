@@ -141,8 +141,7 @@ def main():
                 'Giorno4':giorno4,'Pranzo giorno4':pranzo4,
                 'Ritiro bimbo':ritiro,'Parentela':parente
                 }
-        uploaded_file = pd.concat(data)
-        st.write(uploaded_file)
-
+        df = pd.concat(data)
+        st.write(df)
 if __name__ == "__main__":
     main()
