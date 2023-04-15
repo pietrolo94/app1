@@ -17,6 +17,7 @@ def main():
     
     # Titolo del form
     st.title("**Registrazione** :red[MongolCamp] :sunglasses:")
+    #Bottone per scaricare csv di base
     col19, col20=st.columns(2)
     with col19:
         st.subheader('Crea file csv')
@@ -35,6 +36,17 @@ def main():
             b64 = base64.b64encode(csv.encode()).decode()
             href = f'<a href="data:file/csv;base64,{b64}" download="iscrizione.csv">Download file csv</a>'
             st.markdown(href, unsafe_allow_html=True)
+    # Crea un pulsante per caricare il file CSV
+    with col20:
+        st.subheader('Carica file csv')
+        uploaded_file = st.file_uploader("", type="csv")
+
+        # Se è stato caricato un file CSV, leggilo e visualizzalo in una tabella
+        if uploaded_file is not None:
+            df = pd.read_csv(uploaded_file)
+            st.write(df)
+        else:
+            st.write(":red[Carica un file CSV per iniziare.]")
     #Anagrafica
     st.subheader('Anagrafica')
     col9, col10 = st.columns(2)
@@ -150,7 +162,7 @@ def main():
                 }
         df = pd.DataFrame(data)
         # salvare il dataframe in un file CSV
-        add_row_to_csv("registrazione.csv", df)
+        add_row_to_csv(uploaded_file, df)
         # mostrare un messaggio di conferma
         st.success("Dati registrati con successo nel file CSV!")
 
