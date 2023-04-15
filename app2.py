@@ -1,19 +1,7 @@
 import streamlit as st
 import pandas as pd
+import os
 
-def add_bg_from_url():
-    st.markdown(
-         f"""
-         <style>
-         .stApp {{
-             background-image: url("https://cdn.pixabay.com/photo/2019/04/24/11/27/flowers-4151900_960_720.jpg");
-             background-attachment: fixed;
-             background-size: cover
-         }}
-         </style>
-         """,
-         unsafe_allow_html=True
-     )
 def add_row_to_csv(csv_path, df):
     # Leggi il file csv esistente come un dataframe
     existing_df = pd.read_csv(csv_path)
@@ -55,9 +43,9 @@ def main():
     with col1:
         giorno1 = st.selectbox("Giorno 1", ["si", "no"])
         if giorno1 == "si":
-            pranzo = st.selectbox("Pranzo Giorno1", ["si", "no"])
+            pranzo1 = st.selectbox("Pranzo Giorno1", ["si", "no"])
         else:
-            pranzo = "no"
+            pranzo1 = "no"
     with col2:
         giorno2 = st.selectbox("Giorno 2", ["si", "no"])
         if giorno2 == "si":
@@ -103,23 +91,46 @@ def main():
     st.subheader('Autorizzazione ritiro')
     col13, col14=st.columns(2)
     with col13:
-        ritiro = st.text_input("Nome e cognome persona autorizzata")
+        ritiro = st.text_input("Nome e cognome persone autorizzate")
     with col14:
         parente= st.text_input("Legame Parentale")
+    # NOME DEL FILE CSV
+    FILENAME = 'registrazione.csv'
+
+    # VERIFICA SE IL FILE ESISTE
+    if not os.path.exists(FILENAME):
+        # CREA UN DATAFRAME VUOTO
+        df = pd.DataFrame(columns=['Nome', 'Cognome', 'Età', 'Sesso',
+                'Classe', 'Quota pagata',
+                'Allergie', 'Email', 'Telefono1',
+                'Giorno1','Pranzo giorno1',
+                'Giorno2','Pranzo giorno2',
+                'Giorno3','Pranzo giorno3',
+                'Giorno4','Pranzo giorno4',
+                'Ritiro bimbo','Parentela'])
+    # SALVA IL DATAFRAME IN UN FILE CSV
+        df.to_csv(FILENAME, index=False)
+
+    # CARICA I DATI DAL FILE CSV
+    df = pd.read_csv(FILENAME)
 
     # aggiungere un pulsante per salvare i dati in un file CSV
     if st.button("Salva dati"):
         # creare un dataframe con i dati inseriti
         data = {'Nome': [nome], 'Cognome':[cognome], 'Età':[age], 'Sesso':[sesso],
+                'Classe':[classe], 'Quota pagata':[quota],
                 'Allergie':[allergie], 'Email': [email], 'Telefono1': [telefono1],
-                'Giorno1':giorno1, 'Giorno2':giorno2,'Giorno3':giorno3, 'Giorno4':giorno4
+                'Giorno1':giorno1,'Pranzo giorno1':[pranzo1],
+                'Giorno2':giorno2,'Pranzo giorno2':[pranzo2],
+                'Giorno3':giorno3,'Pranzo giorno3':[pranzo3],
+                'Giorno4':giorno4,'Pranzo giorno4':[pranzo4],
+                'Ritiro bimbo':[ritiro],'Parentela':[parente]
                 }
         df = pd.DataFrame(data)
         # salvare il dataframe in un file CSV
         add_row_to_csv("registrazione.csv", df)
         # mostrare un messaggio di conferma
         st.success("Dati registrati con successo nel file CSV!")
-    add_bg_from_url()
 
 if __name__ == "__main__":
     main()
