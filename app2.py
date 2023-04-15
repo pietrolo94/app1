@@ -127,25 +127,6 @@ def main():
     with col15:
         foto = st.selectbox("Autorizzazione Foto", ["si", "no"])
 
-
-    # NOME DEL FILE CSV
-    FILENAME = 'registrazione.csv'
-    # VERIFICA SE IL FILE ESISTE
-    if not os.path.exists(FILENAME):
-        # CREA UN DATAFRAME VUOTO
-        df = pd.DataFrame(columns=['Nome', 'Cognome', 'Eta', 'Sesso',
-                'Classe', 'Quota pagata',
-                'Allergie','Intolleranze', 'Email','Foto'
-                'Telefono1','Telefono2',
-                'via','cap','comune',
-                'Giorno1','Pranzo giorno1',
-                'Giorno2','Pranzo giorno2',
-                'Giorno3','Pranzo giorno3',
-                'Giorno4','Pranzo giorno4',
-                'Ritiro bimbo','Parentela'])
-    # SALVA IL DATAFRAME IN UN FILE CSV
-        df.to_csv(FILENAME, index=False)
-
     # aggiungere un pulsante per salvare i dati in un file CSV
     if st.button("Salva dati"):
         # creare un dataframe con i dati inseriti
