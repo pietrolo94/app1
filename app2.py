@@ -24,9 +24,9 @@ def main():
         if st.button("Crea file csv"):
             df = pd.DataFrame(columns=['Nome', 'Cognome', 'Eta', 'Sesso',
                     'Classe', 'Quota pagata',
-                    'Allergie','Intolleranze', 'Email','Foto'
+                    'Intolleranze','Allergie', 'Email','Foto'
                     'Telefono1','Telefono2',
-                    'via','cap','comune',
+                    'Indirizzo','Cap','Comune',
                     'Giorno1','Pranzo giorno1',
                     'Giorno2','Pranzo giorno2',
                     'Giorno3','Pranzo giorno3',
