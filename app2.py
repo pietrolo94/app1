@@ -3,9 +3,7 @@ import streamlit as st
 import pandas as pd
 
 
-def aggiungi_riga(df,nome,cognome,age,sesso,classe,quota,intolleranze,allergie,email,foto,
-                  telefono1,telefono2,via,cap,comune,giorno1,pranzo1,giorno2,
-                  pranzo2,giorno3,pranzo3,giorno4,pranzo4,ritiro,parente):
+def aggiungi_riga(df,nome,cognome,age,sesso,classe,quota,intolleranze,allergie,email,foto,telefono1,telefono2,via,cap,comune,giorno1,pranzo1,giorno2,pranzo2,giorno3,pranzo3,giorno4,pranzo4,ritiro,parente):
     data = {'Nome': nome, 'Cognome':cognome, 'Eta':age, 'Sesso':sesso,
                 'Classe':classe, 'Quota pagata':quota,
                 'Intolleranze':intolleranze,'Allergie':allergie, 'Email': email,'Foto':foto,
@@ -137,9 +135,7 @@ def main():
         foto = st.selectbox("Autorizzazione Foto", ["si", "no"])
 
     if st.button("Aggiungi"):
-        df=aggiungi_riga(df,nome,cognome,age,sesso,classe,quota,intolleranze,allergie,email,foto,
-                    telefono1,telefono2,via,cap,comune,giorno1,pranzo1,giorno2,
-                    pranzo2,giorno3,pranzo3,giorno4,pranzo4,ritiro,parente)
+        df=aggiungi_riga(df,nome,cognome,age,sesso,classe,quota,intolleranze,allergie,email,foto,telefono1,telefono2,via,cap,comune,giorno1,pranzo1,giorno2,pranzo2,giorno3,pranzo3,giorno4,pranzo4,ritiro,parente)
         st.write(df)
 
 
