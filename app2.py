@@ -143,7 +143,7 @@ def main():
                 }
         df = pd.DataFrame(data)
         # salvare il dataframe in un file CSV
-        add_row_to_csv(uploaded_file, df)
+        add_row_to_csv("iscrizione.csv", df)
         # mostrare un messaggio di conferma
         st.success("Dati registrati con successo nel file CSV!")
 
