@@ -6,7 +6,7 @@ import pandas as pd
 def aggiungi_riga(df,nome,cognome,age,sesso,classe,quota,intolleranze,allergie,email,foto,
                   telefono1,telefono2,via,cap,comune,giorno1,pranzo1,giorno2,
                   pranzo2,giorno3,pranzo3,giorno4,pranzo4,ritiro,parente):
-    nuova_riga = pd.DataFrame({'Nome': nome, 'Cognome':cognome, 'Eta':age, 'Sesso':sesso,
+    data = {'Nome': nome, 'Cognome':cognome, 'Eta':age, 'Sesso':sesso,
                 'Classe':classe, 'Quota pagata':quota,
                 'Intolleranze':intolleranze,'Allergie':allergie, 'Email': email,'Foto':foto,
                 'Telefono1': telefono1,'Telefono2':telefono2,
@@ -16,8 +16,9 @@ def aggiungi_riga(df,nome,cognome,age,sesso,classe,quota,intolleranze,allergie,e
                 'Giorno3':giorno3,'Pranzo giorno3':pranzo3,
                 'Giorno4':giorno4,'Pranzo giorno4':pranzo4,
                 'Ritiro bimbo':ritiro,'Parentela':parente
-                })
-    df = pd.concat([df, nuova_riga], ignore_index=True)
+                ,}
+    nuova_riga=pd.DataFrame(data, index=0)
+    df = pd.append(df, nuova_riga, ignore_index=True)
     return df
 
 def main():
