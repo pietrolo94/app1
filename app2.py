@@ -142,7 +142,7 @@ def main():
                 'Ritiro bimbo':ritiro,'Parentela':parente
                 }
         nuova_riga = pd.DataFrame(data)
-        df2 = pd.concat(nuova_riga)
-        st.write(df2)
+        df = pd.append(nuova_riga)
+        st.write(df)
 if __name__ == "__main__":
     main()
