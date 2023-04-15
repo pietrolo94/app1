@@ -102,7 +102,8 @@ def main():
         # CREA UN DATAFRAME VUOTO
         df = pd.DataFrame(columns=['Nome', 'Cognome', 'Età', 'Sesso',
                 'Classe', 'Quota pagata',
-                'Allergie', 'Email', 'Telefono1',
+                'Allergie','Intolleranze', 'Email','Foto'
+                'Telefono1','Telefono2',
                 'Giorno1','Pranzo giorno1',
                 'Giorno2','Pranzo giorno2',
                 'Giorno3','Pranzo giorno3',
@@ -119,7 +120,8 @@ def main():
         # creare un dataframe con i dati inseriti
         data = {'Nome': [nome], 'Cognome':[cognome], 'Età':[age], 'Sesso':[sesso],
                 'Classe':[classe], 'Quota pagata':[quota],
-                'Allergie':[allergie], 'Email': [email], 'Telefono1': [telefono1],
+                'Intolleranze':[intolleranze],'Allergie':[allergie], 'Email': [email],'Foto':[foto],
+                'Telefono1': [telefono1],'Telefono2':[telefono2],
                 'Giorno1':giorno1,'Pranzo giorno1':[pranzo1],
                 'Giorno2':giorno2,'Pranzo giorno2':[pranzo2],
                 'Giorno3':giorno3,'Pranzo giorno3':[pranzo3],
