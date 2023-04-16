@@ -3,14 +3,15 @@ import pandas as pd
 import base64
 
 def add_rows(df):
-    for idx, col in enumerate(df.columns):
+    for idx, _ in enumerate(df.index):
+        st.write(f"Riga {idx + 1}")
         row = {}
         for col in df.columns:
             value = st.text_input(f"Inserisci valore per {col}", key=f"{col}_{idx}")
             row[col] = value
-        df = df.append(row, ignore_index=True)
+        df.loc[idx] = row
         st.write(df)
-        add_another = st.selectbox("Aggiungi un'altra riga?", ("Si", "No"))
+        add_another = st.selectbox(f"Aggiungi un'altra riga?", ("Si", "No"), key=f"{idx}_add_another")
         if add_another == "No":
             break
     return df
