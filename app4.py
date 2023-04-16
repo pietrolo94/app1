@@ -124,7 +124,7 @@ def main():
 
     if st.button('Rimuovi'):
     #rimuove la riga selezionata dall'utente
-        index = st.number_input('Inserisci l\'indice della riga da rimuovere', value=0,min_value=0 max_value=len(df)-1)
+        index = st.number_input('Inserisci l\'indice della riga da rimuovere', value=0,min_value=0, max_value=len(df)-1)
         df.drop(index, inplace=True)
         #aggiorna il file CSV con i dati aggiornati
         df.to_csv('dati_bambini.csv', index=False)
