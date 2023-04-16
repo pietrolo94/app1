@@ -137,7 +137,7 @@ def main():
     with col20:
         if st.button('Excel'):
             df = pd.read_csv('dati_bambini.csv')
-            excel = df.to_excel(index=False)
+            excel = df.to_excel('dati_bambini.xlsx', index=False)
             st.download_button(
                 label="Download Excel",
                 data=excel,
