@@ -1,4 +1,2 @@
 streamlit
 xlsxwriter
-pandas
-plotly.express
