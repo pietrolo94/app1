@@ -1,14 +1,8 @@
 import streamlit as st
 import csv
 import pandas as pd
-import plotly
 import plotly.express as px
 
-def crea_csv_bambini():
-    header = ['Nome', 'Cognome', 'Eta', 'Sesso', 'Classe', 'Quota pagata', 'Intolleranze', 'Allergie', 'Email', 'Foto', 'Telefono1', 'Telefono2', 'Indirizzo', 'Cap', 'Comune', 'Giorno1', 'Pranzo Giorno1', 'Giorno2', 'Pranzo Giorno2', 'Giorno3', 'Pranzo Giorno3', 'Giorno4', 'Pranzo Giorno4', 'Ritiro bimbo', 'Parentela','Foto']
-    with open('dati_bambini.csv', mode='w', newline='') as file:
-        csv_writer = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-        csv_writer.writerow(header)
 #funzione modifica riga (spostata nella pagina Modifica)
 def modifica_cella(df, index, colonna, valore):
     df.at[index, colonna] = valore
@@ -31,7 +25,6 @@ def scrivi_su_file(nome, cognome, eta, sesso, classe, quota, intolleranze, aller
         writer.writerow([nome, cognome, eta, sesso, classe, quota, intolleranze, allergie, email, foto, telefono1, telefono2, indirizzo, cap, comune, giorno1, pranzo1, giorno2, pranzo2, giorno3, pranzo3, giorno4, pranzo4, ritiro, parente, foto])
     st.success('Dati salvati!')
 def main():
-    crea_csv_bambini()
     st.set_page_config(page_title="Palaminchia", page_icon=":star:", layout="wide")
     menu = ["Inserimento Dati","Modifica Dati","Statistiche"]
     choice = st.sidebar.selectbox("Scegli una pagina", menu)
