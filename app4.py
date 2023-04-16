@@ -23,7 +23,7 @@ def scrivi_su_file(nome, cognome, eta, sesso, classe, quota, intolleranze, aller
     #scrive il nuovo bambino nel file
     with open('dati_bambini.csv', 'a', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow([nome, cognome, eta, sesso, classe, quota, intolleranze, allergie, email, foto, telefono1, telefono2, indirizzo, cap, comune, giorno1, pranzo1, giorno2, pranzo2, giorno3, pranzo3, giorno4, pranzo4, ritiro, parente])
+        writer.writerow([nome, cognome, eta, sesso, classe, quota, intolleranze, allergie, email, foto, telefono1, telefono2, indirizzo, cap, comune, giorno1, pranzo1, giorno2, pranzo2, giorno3, pranzo3, giorno4, pranzo4, ritiro, parente, foto])
     st.success('Dati salvati!')
 
 #st.help(st.form)
