@@ -9,6 +9,7 @@ def add_rows(df):
             value = st.text_input(f"Inserisci valore per {col}")
             row[col] = value
         df = df.append(row, ignore_index=True)
+        st.write(df)
         add_another = st.selectbox("Aggiungi un'altra riga?", ("Si", "No"))
         if add_another == "No":
             break
@@ -43,12 +44,11 @@ def main ():
         # Se è stato caricato un file CSV, leggilo e visualizzalo in una tabella
         if uploaded_file is not None:
             df = pd.read_csv(uploaded_file)
+            df = add_rows(df)
             st.write(df)
         else:
             st.write(":red[Carica un file CSV per iniziare.]")
-        if df is not None:
-            st.header("Aggiungi righe")
-            df = add_rows(df)
+
 
 if __name__ == "__main__":
     main()
