@@ -1,6 +1,7 @@
 import streamlit as st
 import csv
 import pandas as pd
+import plotly
 import plotly.express as px
 
 def crea_csv_bambini():
