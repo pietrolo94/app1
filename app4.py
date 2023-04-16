@@ -121,6 +121,29 @@ def main():
     #visualizza i dati
     st.write('### Elenco bambini registrati')
     st.write(df)
+    #crea pulsanti per scaricare il file CSV e Excel
+    st.write('### Scarica dati')
+    col19, col20=st.columns(2)
+    with col19:
+        if st.button('CSV'):
+            df = pd.read_csv('dati_bambini.csv')
+            csv = df.to_csv(index=False)
+            st.download_button(
+                label="Download CSV",
+                data=csv,
+                file_name='dati_bambini.csv',
+                mime='text/csv'
+            )
+    with col20:
+        if st.button('Excel'):
+            df = pd.read_csv('dati_bambini.csv')
+            excel = df.to_excel(index=False)
+            st.download_button(
+                label="Download Excel",
+                data=excel,
+                file_name='dati_bambini.xlsx',
+                mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+            )
 
     st.write('### Rimuovi riga')
     index = st.number_input('Inserisci l\'indice della riga da rimuovere', value=0,min_value=0, max_value=len(df)-1)
