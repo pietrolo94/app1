@@ -1,5 +1,6 @@
 import streamlit as st
 import csv
+import pandas as pd
 
 #crea il file CSV se non esiste
 try:
@@ -117,5 +118,11 @@ def main():
         scrivi_su_file(nome, cognome, eta, sesso, classe, quota, intolleranze, allergie, email, telefono1, telefono2, via, cap, comune, giorno1, pranzo1, giorno2, pranzo2, giorno3, pranzo3, giorno4, pranzo4, ritiro, parente, foto)
         st.success('Dati salvati!')
 
+    #legge i dati dal file CSV e crea un dataframe pandas
+    df = pd.read_csv('dati_bambini.csv')
+
+    #visualizza i dati
+    st.write('### Elenco bambini registrati')
+    st.write(df)
 if __name__ == "__main__":
     main()
