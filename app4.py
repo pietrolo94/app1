@@ -181,7 +181,7 @@ def main():
             #filtra il DataFrame per il giorno selezionato
             df_giorno = df.loc[df['{}' .format(giorno)] == 'si']
     
-            df_giorno = df_giorno[['Nome', 'Eta', 'Classe', 'Pranzo {}'.format(giorno),]]
+            df_giorno = df_giorno[['Nome','Cognome', 'Eta', 'Classe', 'Pranzo {}'.format(giorno),'Foto']]
             #visualizza i dati
             st.write('### Elenco bambini{}:'.format('' if giorno=='Tutti i giorni' else '  {}'.format(giorno)))
             st.write(df_giorno)
@@ -190,6 +190,9 @@ def main():
             fig = px.bar(num_bambini_per_classe, x=num_bambini_per_classe.index, y=num_bambini_per_classe.values, labels={'x': 'Classe', 'y':'Numero di bambini'})
             st.plotly_chart(fig, use_container_width=True)
             st.write(num_bambini_per_classe)
-
+            foto_no = df_giorno.loc[df_giorno['Foto'] == 'no']
+            if not foto_no.empty:
+                st.write('### Bambini senza autorizzazione foto:')
+                st.write(foto_no[['Nome', 'Cognome']])
 if __name__ == "__main__":
     main()
