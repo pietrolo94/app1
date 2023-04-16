@@ -2,6 +2,17 @@ import base64
 import streamlit as st
 import pandas as pd
 
+def add_rows(df):
+    while True:
+        row = {}
+        for col in df.columns:
+            value = st.text_input(f"Inserisci valore per {col}")
+            row[col] = value
+        df = df.append(row, ignore_index=True)
+        add_another = st.selectbox("Aggiungi un'altra riga?", ("Si", "No"))
+        if add_another == "No":
+            break
+    return df
 
 def aggiungi_riga(df,nome,cognome,age,sesso,classe,quota,intolleranze,allergie,email,foto,telefono1,telefono2,via,cap,comune,giorno1,pranzo1,giorno2,pranzo2,giorno3,pranzo3,giorno4,pranzo4,ritiro,parente):
     data = {'Nome': nome, 'Cognome':cognome, 'Eta':age, 'Sesso':sesso,
