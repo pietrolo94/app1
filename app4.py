@@ -144,7 +144,7 @@ def main():
             
     #Rimuove la riga selezionata dall'utente
     st.write('### Rimuovi riga')
-    index = st.number_input('Inserisci l\'indice della riga da rimuovere', value=0,min_value=0, max_value=len(df)-1)
+    index = st.number_input('Inserisci l\'indice della riga da rimuovere', value=0,min_value=0, max_value=len(df))
 
     if st.button('Rimuovi'):
     #rimuove la riga
