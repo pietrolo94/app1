@@ -2,15 +2,6 @@ import streamlit as st
 import csv
 import pandas as pd
 
-#crea il file CSV se non esiste
-try:
-    file = open('dati_bambini.csv', 'x', newline='')
-    writer = csv.writer(file)
-    writer.writerow(['Nome', 'Cognome', 'Eta', 'Sesso', 'Classe', 'Quota pagata', 'Intolleranze', 'Allergie', 'Email', 'Foto', 'Telefono1', 'Telefono2', 'Indirizzo', 'Cap', 'Comune', 'Giorno1', 'Pranzo Giorno1', 'Giorno2', 'Pranzo Giorno2', 'Giorno3', 'Pranzo Giorno3', 'Giorno4', 'Pranzo Giorno4', 'Ritiro bimbo', 'Parentela','Foto'])
-    file.close()
-except FileExistsError:
-    pass
-
 #funzione modifica riga (spostata nella pagina Modifica)
 def modifica_cella(df, index, colonna, valore):
     df.at[index, colonna] = valore
