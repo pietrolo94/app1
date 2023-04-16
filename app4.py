@@ -164,35 +164,38 @@ def main():
     #Pagina Visualizzazione dati
     if choice == "Statistiche":
         df = pd.read_csv('dati_bambini.csv')
-        st.title('Seleziona il giorno')
-        giorni = ['Tutti i giorni', 'Giorno1', 'Giorno2', 'Giorno3', 'Giorno4']
-        giorno = st.selectbox("Giorno", giorni)
-        if giorno == 'Tutti i giorni':
-            df_giorno = df
-            df = df_giorno.rename(columns={'Classe': 'Numero Bambini'})
-            num_bambini_per_classe = df['Numero Bambini'].value_counts()
-            st.write('### Report')
-            st.write(df_giorno[['Nome', 'Cognome', 'Eta', 'Classe', 'Telefono1', 'Telefono2']])
-            fig = px.bar(num_bambini_per_classe, x=num_bambini_per_classe.index, y=num_bambini_per_classe.values, labels={'x': 'Classe', 'y':'Numero di bambini'})
-            st.plotly_chart(fig, use_container_width=True)
-            
-            st.write(num_bambini_per_classe)
+        if df.empty:
+            st.write(':red[Iscerisci dei dati per avere dei report]')
         else:
-            #filtra il DataFrame per il giorno selezionato
-            df_giorno = df.loc[df['{}' .format(giorno)] == 'si']
-    
-            df_giorno = df_giorno[['Nome','Cognome', 'Eta', 'Classe', 'Pranzo {}'.format(giorno),'Foto']]
-            #visualizza i dati
-            st.write('### Elenco bambini{}:'.format('' if giorno=='Tutti i giorni' else '  {}'.format(giorno)))
-            st.write(df_giorno)
-            df = df_giorno.rename(columns={'Classe': 'Numero Bambini'})
-            num_bambini_per_classe =df['Numero Bambini'].value_counts()
-            fig = px.bar(num_bambini_per_classe, x=num_bambini_per_classe.index, y=num_bambini_per_classe.values, labels={'x': 'Classe', 'y':'Numero di bambini'})
-            st.plotly_chart(fig, use_container_width=True)
-            st.write(num_bambini_per_classe)
-            foto_no = df_giorno.loc[df_giorno['Foto'] == 'no']
-            if not foto_no.empty:
-                st.write('### Bambini senza autorizzazione foto:')
-                st.write(foto_no[['Nome', 'Cognome']])
+            st.title('Seleziona il giorno')
+            giorni = ['Tutti i giorni', 'Giorno1', 'Giorno2', 'Giorno3', 'Giorno4']
+            giorno = st.selectbox("Giorno", giorni)
+            if giorno == 'Tutti i giorni':
+                df_giorno = df
+                df = df_giorno.rename(columns={'Classe': 'Numero Bambini'})
+                num_bambini_per_classe = df['Numero Bambini'].value_counts()
+                st.write('### Report')
+                st.write(df_giorno[['Nome', 'Cognome', 'Eta', 'Classe', 'Telefono1', 'Telefono2']])
+                fig = px.bar(num_bambini_per_classe, x=num_bambini_per_classe.index, y=num_bambini_per_classe.values, labels={'x': 'Classe', 'y':'Numero di bambini'})
+                st.plotly_chart(fig, use_container_width=True)
+                
+                st.write(num_bambini_per_classe)
+            else:
+                #filtra il DataFrame per il giorno selezionato
+                df_giorno = df.loc[df['{}' .format(giorno)] == 'si']
+        
+                df_giorno = df_giorno[['Nome','Cognome', 'Eta', 'Classe', 'Pranzo {}'.format(giorno),'Foto']]
+                #visualizza i dati
+                st.write('### Elenco bambini{}:'.format('' if giorno=='Tutti i giorni' else '  {}'.format(giorno)))
+                st.write(df_giorno)
+                df = df_giorno.rename(columns={'Classe': 'Numero Bambini'})
+                num_bambini_per_classe =df['Numero Bambini'].value_counts()
+                fig = px.bar(num_bambini_per_classe, x=num_bambini_per_classe.index, y=num_bambini_per_classe.values, labels={'x': 'Classe', 'y':'Numero di bambini'})
+                st.plotly_chart(fig, use_container_width=True)
+                st.write(num_bambini_per_classe)
+                foto_no = df_giorno.loc[df_giorno['Foto'] == 'no']
+                if not foto_no.empty:
+                    st.write('### Bambini senza autorizzazione foto:')
+                    st.write(foto_no[['Nome', 'Cognome']])
 if __name__ == "__main__":
     main()
