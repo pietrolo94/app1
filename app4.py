@@ -122,9 +122,11 @@ def main():
     st.write('### Elenco bambini registrati')
     st.write(df)
 
-    # Aggiungi un pulsante per rimuovere l'ultima riga
     if st.button('Rimuovi ultima riga'):
-        df.drop(df.tail(1).index, inplace=True)
+            df.drop(df.tail(1).index, inplace=True)
+            #aggiorna il file CSV con i dati aggiornati
+            df.to_csv('dati_bambini.csv', index=False)
+            st.success('Ultima riga rimossa!')
 
     if st.button('Rimuovi'):
     #rimuove la riga selezionata dall'utente
