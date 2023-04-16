@@ -30,6 +30,7 @@ def scrivi_su_file(nome, cognome, eta, sesso, classe, quota, intolleranze, aller
         writer.writerow([nome, cognome, eta, sesso, classe, quota, intolleranze, allergie, email, foto, telefono1, telefono2, indirizzo, cap, comune, giorno1, pranzo1, giorno2, pranzo2, giorno3, pranzo3, giorno4, pranzo4, ritiro, parente, foto])
     st.success('Dati salvati!')
 def main():
+    crea_csv_bambini()
     st.set_page_config(page_title="Palaminchia", page_icon=":star:", layout="wide")
     menu = ["Inserimento Dati","Modifica Dati","Statistiche"]
     choice = st.sidebar.selectbox("Scegli una pagina", menu)
