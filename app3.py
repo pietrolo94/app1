@@ -46,9 +46,9 @@ def main ():
             st.write(df)
         else:
             st.write(":red[Carica un file CSV per iniziare.]")
-    if df is not None:
+        if df is not None:
             st.header("Aggiungi righe")
             df = add_rows(df)
-            
+
 if __name__ == "__main__":
     main()
