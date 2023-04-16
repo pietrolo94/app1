@@ -136,13 +136,13 @@ def main():
             )
     with col20:
         if st.button('Excel'):
-            excel = df.to_excel('dati_bambini.xlsx', index=False)
+            df.to_excel('dati_bambini.xlsx', index=False)
             st.download_button(
                 label="Download Excel",
-                data=excel,
+                data='dati_bambini.xlsx',
                 file_name='dati_bambini.xlsx',
                 mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-            )
+            ) 
 
     st.write('### Rimuovi riga')
     index = st.number_input('Inserisci l\'indice della riga da rimuovere', value=0,min_value=0, max_value=len(df)-1)
