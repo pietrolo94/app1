@@ -6,10 +6,17 @@ import pandas as pd
 try:
     file = open('dati_bambini.csv', 'x', newline='')
     writer = csv.writer(file)
-    writer.writerow(['Nome', 'Cognome', 'Eta', 'Sesso', 'Classe', 'Quota pagata', 'Intolleranze', 'Allergie', 'Email', 'Foto', 'Telefono1', 'Telefono2', 'Indirizzo', 'Cap', 'Comune', 'Giorno1', 'Pranzo giorno1', 'Giorno2', 'Pranzo giorno2', 'Giorno3', 'Pranzo giorno3', 'Giorno4', 'Pranzo giorno4', 'Ritiro bimbo', 'Parentela','Foto'])
+    writer.writerow(['Nome', 'Cognome', 'Eta', 'Sesso', 'Classe', 'Quota pagata', 'Intolleranze', 'Allergie', 'Email', 'Foto', 'Telefono1', 'Telefono2', 'Indirizzo', 'Cap', 'Comune', 'Giorno1', 'Pranzo Giorno1', 'Giorno2', 'Pranzo Giorno2', 'Giorno3', 'Pranzo Giorno3', 'Giorno4', 'Pranzo Giorno4', 'Ritiro bimbo', 'Parentela','Foto'])
     file.close()
 except FileExistsError:
     pass
+
+#funzione modifica riga
+def modifica_cella(df, index, colonna, valore):
+    df.at[index, colonna] = valore
+    df.to_csv('dati_bambini.csv', index=False)
+    st.success('Valore modificato!')
+    st.write(df)
 
 #funzione per scrivere i dati su file
 def scrivi_su_file(nome, cognome, eta, sesso, classe, quota, intolleranze, allergie, email, telefono1, telefono2, indirizzo, cap, comune, giorno1, pranzo1, giorno2, pranzo2, giorno3, pranzo3, giorno4, pranzo4, ritiro, parente, foto):
@@ -137,11 +144,20 @@ def main():
     with col20:
         if st.button('Reset'):
             #resetta il dataframe a vuoto
-            df = pd.DataFrame(columns=['Nome', 'Cognome', 'Eta', 'Sesso', 'Classe', 'Quota pagata', 'Intolleranze', 'Allergie', 'Email', 'Foto', 'Telefono1', 'Telefono2', 'Indirizzo', 'Cap', 'Comune', 'Giorno1', 'Pranzo giorno1', 'Giorno2', 'Pranzo giorno2', 'Giorno3', 'Pranzo giorno3', 'Giorno4', 'Pranzo giorno4', 'Ritiro bimbo', 'Parentela','Foto'])
+            df = pd.DataFrame(columns=['Nome', 'Cognome', 'Eta', 'Sesso', 'Classe', 'Quota pagata', 'Intolleranze', 'Allergie', 'Email', 'Foto', 'Telefono1', 'Telefono2', 'Indirizzo', 'Cap', 'Comune', 'Giorno1', 'Pranzo Giorno1', 'Giorno2', 'Pranzo Giorno2', 'Giorno3', 'Pranzo Giorno3', 'Giorno4', 'Pranzo Giorno4', 'Ritiro bimbo', 'Parentela','Foto'])
             #aggiorna il file CSV con il dataframe vuoto
             df.to_csv('dati_bambini.csv', index=False)
             st.success('Dataframe resettato!')
-            
+
+    #sezione per modificare una cella del dataframe
+    st.write('### Modifica valore')
+    index_modifica = st.number_input('Inserisci l\'indice della riga da modificare', value=0, min_value=0, max_value=len(df))
+    colonna_modifica = st.selectbox('Seleziona la colonna da modificare', df.columns)
+    nuovo_valore = st.text_input('Inserisci il nuovo valore')
+    if st.button('Modifica'):
+        modifica_cella(df, index_modifica, colonna_modifica, nuovo_valore)
+    
+    
     #Rimuove la riga selezionata dall'utente
     st.write('### Rimuovi riga')
     index = st.number_input('Inserisci l\'indice della riga da rimuovere', value=0,min_value=0, max_value=len(df))
@@ -153,5 +169,18 @@ def main():
         df.to_csv('dati_bambini.csv', index=False)
         st.success('Riga rimossa!')
         st.write(df)
+    
+    #form per selezionare il giorno
+    st.title('Seleziona il giorno')
+    giorno = st.selectbox("Giorno", ["Giorno1", "Giorno2", "Giorno3", "Giorno4"])
+
+    #filtra il DataFrame per il giorno selezionato
+    df_giorno = df.loc[df['{}' .format(giorno)] == 'si']
+    df_giorno = df_giorno[['Nome', 'Eta', 'Classe', 'Pranzo {}'.format(giorno)]]
+
+    #visualizza i dati
+    st.write('### Elenco bambini per il {}'.format(giorno))
+    st.write(df_giorno)
+
 if __name__ == "__main__":
     main()
