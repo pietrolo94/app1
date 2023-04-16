@@ -3,7 +3,7 @@ import pandas as pd
 import base64
 
 def add_rows(df):
-    while True:
+    for idx, col in enumerate(df.columns):
         row = {}
         for col in df.columns:
             value = st.text_input(f"Inserisci valore per {col}", key=f"{col}_{idx}")
@@ -14,6 +14,7 @@ def add_rows(df):
         if add_another == "No":
             break
     return df
+
 def main ():
 # Titolo del form
     st.title("**Registrazione** :red[MongolCamp] :sunglasses:")
