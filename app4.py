@@ -134,21 +134,13 @@ def main():
                 file_name='dati_bambini.csv',
                 mime='text/csv'
             )
-    with col20:
-        if st.button('Excel'):
-            df.to_excel('dati_bambini.xlsx', index=False)
-            st.download_button(
-                label="Download Excel",
-                data='dati_bambini.xlsx',
-                file_name='dati_bambini.xlsx',
-                mime='text/xlsx'
-            ) 
-
+    
+    #Rimuove la riga selezionata dall'utente
     st.write('### Rimuovi riga')
     index = st.number_input('Inserisci l\'indice della riga da rimuovere', value=0,min_value=0, max_value=len(df)-1)
 
     if st.button('Rimuovi'):
-    #rimuove la riga selezionata dall'utente
+    #rimuove la riga
         df.drop(index, inplace=True)
         #aggiorna il file CSV con i dati aggiornati
         df.to_csv('dati_bambini.csv', index=False)
