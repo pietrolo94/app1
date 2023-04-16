@@ -105,7 +105,7 @@ def main():
         st.subheader('Autorizzazioni')
         col13, col14, col15=st.columns(3)
         with col13:
-            ritiro = st.text_input("Nome e cognome persone autorizzate")
+            ritiro = st.text_input("Persone autorizzate ritiro")
         with col14:
             parente= st.text_input("Legame Parentale")
         #autorizzazione foto
