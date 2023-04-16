@@ -134,7 +134,14 @@ def main():
                 file_name='dati_bambini.csv',
                 mime='text/csv'
             )
-    
+    with col20:
+        if st.button('Reset'):
+            #resetta il dataframe a vuoto
+            df = pd.DataFrame(columns=['Nome', 'Cognome', 'Eta', 'Sesso', 'Classe', 'Quota pagata', 'Intolleranze', 'Allergie', 'Email', 'Foto', 'Telefono1', 'Telefono2', 'Indirizzo', 'Cap', 'Comune', 'Giorno1', 'Pranzo giorno1', 'Giorno2', 'Pranzo giorno2', 'Giorno3', 'Pranzo giorno3', 'Giorno4', 'Pranzo giorno4', 'Ritiro bimbo', 'Parentela','Foto'])
+            #aggiorna il file CSV con il dataframe vuoto
+            df.to_csv('dati_bambini.csv', index=False)
+            st.success('Dataframe resettato!')
+            
     #Rimuove la riga selezionata dall'utente
     st.write('### Rimuovi riga')
     index = st.number_input('Inserisci l\'indice della riga da rimuovere', value=0,min_value=0, max_value=len(df)-1)
