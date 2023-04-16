@@ -141,7 +141,7 @@ def main():
                 label="Download Excel",
                 data='dati_bambini.xlsx',
                 file_name='dati_bambini.xlsx',
-                mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+                mime='text/xlsx'
             ) 
 
     st.write('### Rimuovi riga')
