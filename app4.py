@@ -1,6 +1,7 @@
 import streamlit as st
 import csv
 import pandas as pd
+import plotly.express as px
 
 #funzione modifica riga (spostata nella pagina Modifica)
 def modifica_cella(df, index, colonna, valore):
@@ -160,20 +161,56 @@ def main():
             st.success('Riga rimossa!')
             st.write(df)
     
-    #Pagina Visualizzazione fati
+    #Pagina Visualizzazione dati
     if choice == "Statistiche":
         df = pd.read_csv('dati_bambini.csv')
         st.title('Seleziona il giorno')
-        giorno = st.selectbox("Giorno", ["Giorno1", "Giorno2", "Giorno3", "Giorno4"])
-
+        giorni = ['Tutti i giorni', 'Giorno1', 'Giorno2', 'Giorno3', 'Giorno4']
+        giorno = st.selectbox("Giorno", giorni)
+        if giorno == 'Tutti i giorni':
+            df_giorno = df
+            df = df_giorno.rename(columns={'Classe': 'Numero Bambini'})
+            num_bambini_per_classe = df['Numero Bambini'].value_counts()
+            st.write('### Report')
+            st.write(df_giorno[['Nome', 'Cognome', 'Eta', 'Classe', 'Telefono1', 'Telefono2']])
+            fig = px.bar(num_bambini_per_classe, x=num_bambini_per_classe.index, y=num_bambini_per_classe.values, labels={'x': 'Classe', 'y':'Numero di bambini'})
+            st.plotly_chart(fig, use_container_width=True)
+            
+            st.write(num_bambini_per_classe)
+        else:
+            #filtra il DataFrame per il giorno selezionato
+            df_giorno = df.loc[df['{}' .format(giorno)] == 'si']
+    
+            df_giorno = df_giorno[['Nome', 'Eta', 'Classe', 'Pranzo {}'.format(giorno),]]
+            #visualizza i dati
+            st.write('### Elenco bambini{}:'.format('' if giorno=='Tutti i giorni' else '  {}'.format(giorno)))
+            st.write(df_giorno)
+            df = df_giorno.rename(columns={'Classe': 'Numero Bambini'})
+            num_bambini_per_classe =df['Numero Bambini'].value_counts()
+            fig = px.bar(num_bambini_per_classe, x=num_bambini_per_classe.index, y=num_bambini_per_classe.values, labels={'x': 'Classe', 'y':'Numero di bambini'})
+            st.plotly_chart(fig, use_container_width=True)
+            st.write(num_bambini_per_classe)
         #filtra il DataFrame per il giorno selezionato
-        df_giorno = df.loc[df['{}' .format(giorno)] == 'si']
-        df_giorno = df_giorno[['Nome', 'Eta', 'Classe', 'Pranzo {}'.format(giorno),]]
-        eta_media = df_giorno['Eta'].mean()
-        #visualizza i dati
-        st.write('### Elenco bambini per il {}'.format(giorno))
-        st.write(df_giorno)
-        st.write('Età media: {}'.format(eta_media))
+        # df_giorno = df.loc[df['{}' .format(giorno)] == 'si']
+        # df_giorno = df_giorno[['Nome', 'Eta', 'Classe', 'Pranzo {}'.format(giorno),]]
+        # eta_media = df_giorno['Eta'].mean()
+        # #visualizza i dati
+        # st.write('### Elenco bambini per il {}'.format(giorno))
+        # st.write(df_giorno)
+        # st.write('Età media: {}'.format(eta_media))
+        # classe_options = df_giorno['Classe'].unique().tolist()
+        # classe_options.insert(0, 'Tutte le classi')
+        # classe_select = st.selectbox('Seleziona la classe', classe_options)
+
+        #filtra il DataFrame in base alla classe selezionata
+        # if classe_select != 'Tutte le classi':
+        #     df_giorno = df_giorno.loc[df_giorno['Classe'] == classe_select]
+        #     st.write(df_giorno)
+        # num_bambini_per_classe = df_giorno['Classe'].value_counts()
+        # st.write('### Numero di bambini per classe:')
+        # st.write(df_giorno[['Nome', 'Cognome', 'Eta', 'Classe', 'Telefono1', 'Telefono2']])
+        # fig = px.bar(num_bambini_per_classe, x=num_bambini_per_classe.index, y=num_bambini_per_classe.values, labels={'x': 'Classe', 'y':'Numero di bambini'})
+        # st.plotly_chart(fig, use_container_width=True)
 
 if __name__ == "__main__":
     main()
