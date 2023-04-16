@@ -64,22 +64,19 @@ def main():
                 pranzo1 = "no"
         with col2:
             giorno2 = st.selectbox("Giorno 2", ["si", "no"])
-            if giorno2 == "si":
-                pranzo2 = st.selectbox("Pranzo Giorno2", ["si", "no"])
-            else:
-                pranzo2 = "no"
+
+            pranzo2 = st.selectbox("Pranzo Giorno2", ["si", "no"])
+
         with col3:
             giorno3 = st.selectbox("Giorno 3", ["si", "no"])
-            if giorno3 == "si":
-                pranzo3 = st.selectbox("Pranzo Giorno3", ["si", "no"])
-            else:
-                pranzo3 = "no"
+
+            pranzo3 = st.selectbox("Pranzo Giorno3", ["si", "no"])
+
         with col4:
             giorno4 = st.selectbox("Giorno 4", ["si", "no"])
-            if giorno4 == "si":
-                pranzo4 = st.selectbox("Pranzo Giorno4", ["si", "no"])
-            else:
-                pranzo4 = "no"
+
+            pranzo4 = st.selectbox("Pranzo Giorno4", ["si", "no"])
+
         # Campo intolleranze/diete
         intolleranze = st.text_input("Intolleranze o diete")
         # Campo allergie
