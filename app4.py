@@ -221,18 +221,18 @@ def main():
                 
                 st.write(num_bambini_per_classe)
                 eta_media = df_giorno['Eta'].mean()
-                st.write('### Età media dei bambini registrati: {} anni'.format(round(eta_media, 1)))
+                st.write('#### Età media dei bambini registrati: {} anni'.format(round(eta_media, 1)))
                 num_foto_no = (df['Foto'] == 'no').sum()
-                st.write('### Numero bambini no foto: {} '.format(round(num_foto_no, 1)))
+                st.write('#### Numero bambini no foto: {} '.format(round(num_foto_no, 1)))
                 quota_media = df_giorno['Quota pagata'].mean()
-                st.write('### Quota media pagata dai bambini: {} euro'.format(round(quota_media, 2)))
+                st.write('#### Quota media pagata dai bambini: {} euro'.format(round(quota_media, 2)))
                 quota_totale = df_giorno['Quota pagata'].sum()
-                st.write('### Quota totale pagata dai bambini: {} euro'.format(round(quota_totale, 2)))
+                st.write('#### Quota totale pagata dai bambini: {} euro'.format(round(quota_totale, 2)))
             else:
                 #filtra il DataFrame per il giorno selezionato
                 df_giorno = df.loc[df['{}' .format(giorno)] == 'si']
         
-                df_giorno = df_giorno[['Nome','Cognome', 'Eta', 'Classe', 'Pranzo giorno{}'.format(giorno[-1]),'Foto', 'Intolleranze', 'Allergie']]
+                df_giorno = df_giorno[['Nome','Cognome', 'Eta', 'Classe', 'Pranzo Giorno{}'.format(giorno[-1]),'Foto', 'Intolleranze', 'Allergie']]
                 #visualizza i dati
                 st.write('### Elenco bambini{}:'.format('' if giorno=='Tutti i giorni' else '  {}'.format(giorno)))
                 df_giorno = df_giorno.assign(Colonna1='', Colonna2='')
@@ -242,7 +242,7 @@ def main():
                 fig = px.bar(num_bambini_per_classe, x=num_bambini_per_classe.index, y=num_bambini_per_classe.values, labels={'x': 'Classe', 'y':'Numero di bambini'})
                 st.plotly_chart(fig, use_container_width=True)
                 st.write(num_bambini_per_classe)
-                pranzi=df_giorno['Pranzo giorno{}'.format(giorno[-1])].value_counts()
+                pranzi=df_giorno['Pranzo Giorno{}'.format(giorno[-1])].value_counts()
                 st.write(pranzi)
                 foto_no = df_giorno.loc[df_giorno['Foto'] == 'no']
                 if not foto_no.empty:
