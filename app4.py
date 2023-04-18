@@ -192,7 +192,7 @@ def main():
                 #filtra il DataFrame per il giorno selezionato
                 df_giorno = df.loc[df['{}' .format(giorno)] == 'si']
         
-                df_giorno = df_giorno[['Nome','Cognome', 'Eta', 'Classe', 'Pranzo {}'.format(giorno),'Foto']]
+                df_giorno = df_giorno[['Nome','Cognome', 'Eta', 'Classe', 'Pranzo giorno{}'.format(giorno[-1]),'Foto']]
                 #visualizza i dati
                 st.write('### Elenco bambini{}:'.format('' if giorno=='Tutti i giorni' else '  {}'.format(giorno)))
                 st.write(df_giorno)
