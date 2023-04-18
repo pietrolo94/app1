@@ -188,22 +188,30 @@ def main():
                 st.plotly_chart(fig, use_container_width=True)
                 
                 st.write(num_bambini_per_classe)
+                eta_media = df_giorno['Eta'].mean()
+                st.write('### Età media dei bambini registrati: {} anni'.format(round(eta_media, 1)))
+                num_foto_no = (df['Foto'] == 'no').sum()
+                st.write('### Numero bambini no foto: {} '.format(round(num_foto_no, 1)))
             else:
                 #filtra il DataFrame per il giorno selezionato
                 df_giorno = df.loc[df['{}' .format(giorno)] == 'si']
         
-                df_giorno = df_giorno[['Nome','Cognome', 'Eta', 'Classe', 'Pranzo giorno{}'.format(giorno[-1]),'Foto']]
+                df_giorno = df_giorno[['Nome','Cognome', 'Eta', 'Classe', 'Pranzo giorno{}'.format(giorno[-1]),'Foto', 'Intolleranze', 'Allergie']]
                 #visualizza i dati
                 st.write('### Elenco bambini{}:'.format('' if giorno=='Tutti i giorni' else '  {}'.format(giorno)))
+                df_giorno = df_giorno.assign(Colonna1='', Colonna2='')
                 st.write(df_giorno)
-                df = df_giorno.rename(columns={'Classe': 'Numero Bambini'})
-                num_bambini_per_classe =df['Numero Bambini'].value_counts()
+                df_giorno = df_giorno.rename(columns={'Classe': 'Numero Bambini'})
+                num_bambini_per_classe =df_giorno['Numero Bambini'].value_counts()
                 fig = px.bar(num_bambini_per_classe, x=num_bambini_per_classe.index, y=num_bambini_per_classe.values, labels={'x': 'Classe', 'y':'Numero di bambini'})
                 st.plotly_chart(fig, use_container_width=True)
                 st.write(num_bambini_per_classe)
+                pranzi=df_giorno['Pranzo giorno{}'.format(giorno[-1])].value_counts()
+                st.write(pranzi)
                 foto_no = df_giorno.loc[df_giorno['Foto'] == 'no']
                 if not foto_no.empty:
                     st.write('### Bambini senza autorizzazione foto:')
                     st.write(foto_no[['Nome', 'Cognome']])
+
 if __name__ == "__main__":
     main()
