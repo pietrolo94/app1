@@ -3,6 +3,14 @@ import csv
 import pandas as pd
 import plotly.express as px
 
+try:
+    file = open('dati_bambini.csv', 'x', newline='')
+    writer = csv.writer(file)
+    writer.writerow(['Nome', 'Cognome', 'Eta', 'Sesso', 'Classe', 'Quota pagata', 'Intolleranze', 'Allergie', 'Email', 'Foto', 'Telefono1', 'Telefono2', 'Indirizzo', 'Cap', 'Comune', 'Giorno1', 'Pranzo giorno1', 'Giorno2', 'Pranzo giorno2', 'Giorno3', 'Pranzo giorno3', 'Giorno4', 'Pranzo giorno4', 'Ritiro bimbo', 'Parentela','Foto'])
+    file.close()
+except FileExistsError:
+    pass
+
 #funzione modifica riga (spostata nella pagina Modifica)
 def modifica_cella(df, index, colonna, valore):
     df.at[index, colonna] = valore
