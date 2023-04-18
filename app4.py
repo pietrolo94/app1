@@ -3,14 +3,6 @@ import csv
 import pandas as pd
 import plotly.express as px
 
-try:
-    file = open('dati_bambini.csv', 'x', newline='')
-    writer = csv.writer(file)
-    writer.writerow(['Nome', 'Cognome', 'Eta', 'Sesso', 'Classe', 'Quota pagata', 'Intolleranze', 'Allergie', 'Email', 'Foto', 'Telefono1', 'Telefono2', 'Indirizzo', 'Cap', 'Comune', 'Giorno1', 'Pranzo giorno1', 'Giorno2', 'Pranzo giorno2', 'Giorno3', 'Pranzo giorno3', 'Giorno4', 'Pranzo giorno4', 'Ritiro bimbo', 'Parentela','Foto'])
-    file.close()
-except FileExistsError:
-    pass
-
 #funzione modifica riga (spostata nella pagina Modifica)
 def modifica_cella(df, index, colonna, valore):
     df.at[index, colonna] = valore
@@ -33,6 +25,13 @@ def scrivi_su_file(nome, cognome, eta, sesso, classe, quota, intolleranze, aller
         writer.writerow([nome, cognome, eta, sesso, classe, quota, intolleranze, allergie, email, foto, telefono1, telefono2, indirizzo, cap, comune, giorno1, pranzo1, giorno2, pranzo2, giorno3, pranzo3, giorno4, pranzo4, ritiro, parente, foto])
     st.success('Dati salvati!')
 def main():
+    try:
+        file = open('dati_bambini.csv', 'x', newline='')
+        writer = csv.writer(file)
+        writer.writerow(['Nome', 'Cognome', 'Eta', 'Sesso', 'Classe', 'Quota pagata', 'Intolleranze', 'Allergie', 'Email', 'Foto', 'Telefono1', 'Telefono2', 'Indirizzo', 'Cap', 'Comune', 'Giorno1', 'Pranzo giorno1', 'Giorno2', 'Pranzo giorno2', 'Giorno3', 'Pranzo giorno3', 'Giorno4', 'Pranzo giorno4', 'Ritiro bimbo', 'Parentela','Foto'])
+        file.close()
+    except FileExistsError:
+        pass
     st.set_page_config(page_title="Palaminchia", page_icon=":star:", layout="wide")
     menu = ["Inserimento Dati","Modifica Dati","Statistiche"]
     choice = st.sidebar.selectbox("Scegli una pagina", menu)
