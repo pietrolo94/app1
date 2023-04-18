@@ -1,9 +1,1 @@
-Nome,Cognome,Eta,Sesso,Classe,Quota pagata,Intolleranze,Allergie,Email,Foto,Telefono1,Telefono2,Indirizzo,Cap,Comune,Giorno1,Pranzo giorno1,Giorno2,Pranzo giorno2,Giorno3,Pranzo giorno3,Giorno4,Pranzo giorno4,Ritiro bimbo,Parentela,Foto
-dsfgsdfgs,sdfgsdfg,3,Maschio,Nido,15,,,,si,,,,,,si,si,si,si,si,si,si,si,,,si
-hgfiufghsdfjklg,shfgsdfihgdsfjk,3,Maschio,Nido,15,,,,si,,,,,,si,si,si,si,si,si,si,si,,,si
-erghs,sdfgsdfg,3,Maschio,Nido,15,,,,no,,,,,,si,si,si,si,si,si,si,si,,,no
-pinotto,pino,3,Maschio,Materna,15,,,,no,,,,,,si,si,si,si,si,si,si,si,,,no
-pinardo,gdfjgbdfjn,3,Maschio,Elementari,15,,,,si,,,,,,si,si,si,si,si,si,si,si,,,si
-sdfgsdfg,sdfgsdhdh,3,Maschio,Materna,15,,,,si,,,,,,si,si,si,si,si,si,si,si,,,si
-gtfhdgh,shfghsdfg,3,Maschio,Nido,15,,,,si,,,,,,si,si,si,si,si,si,no,no,,,si
-hsfgh,sdfhgsfg,3,Maschio,Materna,15,,,,si,,,,,,si,si,no,no,no,no,si,no,,,si
+Nome,Cognome,Eta,Sesso,Classe,Quota pagata,Intolleranze,Allergie,Email,Foto,Telefono1,Telefono2,Indirizzo,Cap,Comune,Giorno1,Pranzo Giorno1,Giorno2,Pranzo Giorno2,Giorno3,Pranzo Giorno3,Giorno4,Pranzo Giorno4,Ritiro bimbo,Parentela,Foto

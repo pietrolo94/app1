@@ -10,14 +10,29 @@ try:
     writer.writerow(['Nome', 'Cognome', 'Eta', 'Sesso', 'Classe', 'Quota pagata', 'Intolleranze', 'Allergie', 'Email', 'Foto', 'Telefono1', 'Telefono2', 'Indirizzo', 'Cap', 'Comune', 'Giorno1', 'Pranzo giorno1', 'Giorno2', 'Pranzo giorno2', 'Giorno3', 'Pranzo giorno3', 'Giorno4', 'Pranzo giorno4', 'Ritiro bimbo', 'Parentela','Foto'])
     file.close()
 except FileExistsError:
+
     pass
-#funzione modifica riga (spostata nella pagina Modifica)
+try:
+    file = open('educatori.csv', 'x', newline='')
+    writer = csv.writer(file)
+    writer.writerow(['Nome', 'Cognome', 'Ore giorno1', 'Ore giorno2', 'Ore giorno3', 'Ore giorno4'])
+    file.close()
+except FileExistsError:
+
+    pass
+#funzione modifica cella bambini
 def modifica_cella(df, index, colonna, valore):
     df.at[index, colonna] = valore
     df.to_csv('dati_bambini.csv', index=False)
     st.success('Valore modificato!')
     st.write(df)
 
+#funzione modifica cella educatori
+def modifica_cella_ed(df, index, colonna, valore):
+    df.at[index, colonna] = valore
+    df.to_csv('educatori.csv', index=False)
+    st.success('Valore modificato!')
+    st.write(df)
 #funzione per scrivere i dati su file (spostata nella pagina Registrazione)
 def scrivi_su_file(nome, cognome, eta, sesso, classe, quota, intolleranze, allergie, email, telefono1, telefono2, indirizzo, cap, comune, giorno1, pranzo1, giorno2, pranzo2, giorno3, pranzo3, giorno4, pranzo4, ritiro, parente, foto):
     #controlla se il bambino è già presente nel file
@@ -32,9 +47,26 @@ def scrivi_su_file(nome, cognome, eta, sesso, classe, quota, intolleranze, aller
         writer = csv.writer(file)
         writer.writerow([nome, cognome, eta, sesso, classe, quota, intolleranze, allergie, email, foto, telefono1, telefono2, indirizzo, cap, comune, giorno1, pranzo1, giorno2, pranzo2, giorno3, pranzo3, giorno4, pranzo4, ritiro, parente, foto])
     st.success('Dati salvati!')
+
+#funzione per scrivere i dati su file per educatori
+def scrivi_su_file_ed(nome_ed, cognome_ed, ore_giorno1, ore_giorno2, ore_giorno3, ore_giorno4):
+    #controlla se l'educatore è già presente nel file
+    with open('educatori.csv', 'r') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            if row['Nome'] == nome_ed and row['Cognome'] == cognome_ed:
+                st.error('Educatore già registrato')
+                return
+    
+    #scrive il nuovo educatore nel file
+    with open('educatori.csv', 'a', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow([nome_ed, cognome_ed, ore_giorno1, ore_giorno2, ore_giorno3, ore_giorno4])
+    
+    st.success('Dati salvati!')
 def main():
     st.set_page_config(page_title="Palaminchia", page_icon=":star:", layout="wide")
-    menu = ["Inserimento Dati","Modifica Dati","Statistiche"]
+    menu = ["Inserimento Dati","Modifica Dati","Statistiche","Gestione educatori"]
     choice = st.sidebar.selectbox("Scegli una pagina", menu)
     if choice == "Inserimento Dati":
         with st.form(key='my_form', clear_on_submit=True):
@@ -134,7 +166,7 @@ def main():
                     mime='text/csv'
                 )
         with col20:
-            if st.button('Reset'):
+            if st.button('Resetta elenco bambini'):
                 #resetta il dataframe a vuoto
                 df = pd.DataFrame(columns=['Nome', 'Cognome', 'Eta', 'Sesso', 'Classe', 'Quota pagata', 'Intolleranze', 'Allergie', 'Email', 'Foto', 'Telefono1', 'Telefono2', 'Indirizzo', 'Cap', 'Comune', 'Giorno1', 'Pranzo Giorno1', 'Giorno2', 'Pranzo Giorno2', 'Giorno3', 'Pranzo Giorno3', 'Giorno4', 'Pranzo Giorno4', 'Ritiro bimbo', 'Parentela','Foto'])
                 #aggiorna il file CSV con il dataframe vuoto
@@ -192,6 +224,10 @@ def main():
                 st.write('### Età media dei bambini registrati: {} anni'.format(round(eta_media, 1)))
                 num_foto_no = (df['Foto'] == 'no').sum()
                 st.write('### Numero bambini no foto: {} '.format(round(num_foto_no, 1)))
+                quota_media = df_giorno['Quota pagata'].mean()
+                st.write('### Quota media pagata dai bambini: {} euro'.format(round(quota_media, 2)))
+                quota_totale = df_giorno['Quota pagata'].sum()
+                st.write('### Quota totale pagata dai bambini: {} euro'.format(round(quota_totale, 2)))
             else:
                 #filtra il DataFrame per il giorno selezionato
                 df_giorno = df.loc[df['{}' .format(giorno)] == 'si']
@@ -212,6 +248,55 @@ def main():
                 if not foto_no.empty:
                     st.write('### Bambini senza autorizzazione foto:')
                     st.write(foto_no[['Nome', 'Cognome']])
+    #pagina Gestione educatori
+    if choice == "Gestione educatori":
+        #Visualizza i dati
+        st.write('### Elenco educatori')
+        df1 = pd.read_csv('educatori.csv')
+        st.write(df1)
 
+        #Form per inserire i dati degli educatori
+        st.write('### Inserisci dati educatore')
+        with st.form(key='educatore_form', clear_on_submit=True):
+            col21, col22 = st.columns(2)
+            with col21:
+                nome_ed = st.text_input("Nome")
+            with col22:
+                cognome_ed = st.text_input("Cognome")
+            col23, col24, col25, col26 = st.columns(4)
+            with col23:
+                ore_giorno1 = st.number_input("Ore svolte nel giorno 1", min_value=0.0, max_value=12.0, step=0.5, format="%.1f")
+            with col24:
+                ore_giorno2 = st.number_input("Ore svolte nel giorno 2",min_value=0.0, max_value=12.0, step=0.5, format="%.1f")
+            with col25:
+                ore_giorno3 = st.number_input("Ore svolte nel giorno 3",min_value=0.0, max_value=12.0, step=0.5, format="%.1f")
+            with col26:
+                ore_giorno4 = st.number_input("Ore svolte nel giorno 4",min_value=0.0, max_value=12.0, step=0.5, format="%.1f")
+            invio = st.form_submit_button(label='Salva')
+        #Scrivi i dati su file
+        if invio:
+            scrivi_su_file_ed(nome_ed,cognome_ed,ore_giorno1, ore_giorno2,ore_giorno3,ore_giorno4)
+
+            #Visualizza i dati aggiornati
+            st.write('### Elenco educatori')
+            df1 = pd.read_csv('educatori.csv')
+            st.write(df1)
+        #sezione per modificare una cella del dataframe
+        st.write('### Modifica valore')
+        index_modifica = st.number_input('Inserisci l\'indice della riga da modificare', value=0, min_value=0, max_value=len(df1))
+        colonna_modifica = st.selectbox('Seleziona la colonna da modificare', df1.columns)
+        nuovo_valore = st.text_input('Inserisci il nuovo valore')
+        if st.button('Modifica'):
+            modifica_cella_ed(df1, index_modifica, colonna_modifica, nuovo_valore)
+
+        reset = st.button('Resetta elenco educatori')
+        if reset:
+            df1 = pd.DataFrame(columns=['Nome', 'Cognome', 'Ore_giorno1', 'Ore_giorno2', 'Ore_giorno3', 'Ore_giorno4'])
+            df1.to_csv('educatori.csv', index=False)
+
+            #Visualizza il dataframe resettato
+            st.write('### Elenco educatori')
+            df1 = pd.read_csv('educatori.csv')
+            st.write(df1)
 if __name__ == "__main__":
     main()
