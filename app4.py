@@ -44,7 +44,7 @@ def scrivi_su_file(nome, cognome, eta, sesso, classe, quota, intolleranze, aller
     with open('dati_bambini.csv', 'a', newline='') as file:
         writer = csv.writer(file)
         writer.writerow([nome, cognome, eta, sesso, classe, quota, intolleranze, allergie, email, foto, telefono1, telefono2, indirizzo, cap, comune, giorno1, pranzo1, giorno2, pranzo2, giorno3, pranzo3, giorno4, pranzo4, ritiro, parente, foto])
-    st.success('Dati salvati!')
+
 #funzione per scrivere i dati su file per educatori
 def scrivi_su_file_ed(nome_ed, cognome_ed, ore_giorno1, ore_giorno2, ore_giorno3, ore_giorno4):
     #controlla se l'educatore è già presente nel file
