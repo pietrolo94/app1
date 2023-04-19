@@ -325,6 +325,17 @@ def main():
                 st.write('Compensi educatori: {} euro'.format(round(compensi_totali, 2)))
                 ore_totali = df1['Ore totali'].sum()
                 st.write("Ore totali educatori: {}".format(round(ore_totali, 2)))
+                df_report = pd.DataFrame({'Numero totale bimbi':[num_bambini_tot],'Eta media bambini':[eta_media], 
+                                          'Quota media':[quota_media],'Quote incassate':[quota_totale], 'Compensi educatori':[compensi_totali],
+                                          'Ore totali educatori':[ore_totali]})
+                csv = convert_df(df_report)
+                st.download_button(
+                "Download report totale csv",
+                csv,
+                "Report_totale.csv",
+                "text/csv",
+                key='download-csv'
+                )
             else:
                 #filtra il DataFrame per il giorno selezionato
                 df_giorno = df.loc[df['{}' .format(giorno)] == 'si']
