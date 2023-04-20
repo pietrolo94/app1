@@ -73,13 +73,13 @@ def convert_df(df):
    return df.to_csv(index=False).encode('utf-8')
 def main():
     #Setting della pagina
-    st.set_page_config(page_title="Palaminchia", page_icon=":star:", layout="wide")
+    st.set_page_config(page_title="Palazola", page_icon=":star:", layout="wide")
     menu = ["Inserimento Dati","Modifica Dati","Gestione educatori","Riassunto"]
     choice = st.sidebar.selectbox("Scegli una pagina", menu)
     if choice == "Inserimento Dati":
         with st.form(key='my_form', clear_on_submit=True):
             # Titolo del form
-            st.title("**Registrazione** :red[MongolCamp] :sunglasses:")
+            st.title("**Registrazione** :red[Palazola Camps] :sunglasses:")
             #Anagrafica
             st.subheader('Anagrafica')
             col9, col10 = st.columns(2)
@@ -191,6 +191,7 @@ def main():
                     #aggiorna il file CSV con il dataframe vuoto
                     df.to_csv('dati_bambini.csv', index=False)
                     st.success('Dataframe resettato!')
+                    st.write(df)
 
     #pagina Modifica dati
     if choice == "Modifica Dati":
