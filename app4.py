@@ -185,13 +185,11 @@ def main():
         #         )
         with col20:
             if st.button('Resetta elenco bambini'):
-                if st.button("Sei sicuro di voler resettare l'elenco?"):
-                    #resetta il dataframe a vuoto
-                    df = pd.DataFrame(columns=['Nome', 'Cognome', 'Eta', 'Sesso', 'Classe', 'Quota pagata', 'Intolleranze', 'Allergie', 'Email', 'Foto', 'Telefono1', 'Telefono2', 'Indirizzo', 'Cap', 'Comune', 'Giorno1', 'Pranzo Giorno1', 'Giorno2', 'Pranzo Giorno2', 'Giorno3', 'Pranzo Giorno3', 'Giorno4', 'Pranzo Giorno4', 'Ritiro bimbo', 'Parentela','Foto'])
-                    #aggiorna il file CSV con il dataframe vuoto
-                    df.to_csv('dati_bambini.csv', index=False)
-                    st.success('Dataframe resettato!')
-                    st.write(df)
+                #resetta il dataframe a vuoto
+                df = pd.DataFrame(columns=['Nome', 'Cognome', 'Eta', 'Sesso', 'Classe', 'Quota pagata', 'Intolleranze', 'Allergie', 'Email', 'Foto', 'Telefono1', 'Telefono2', 'Indirizzo', 'Cap', 'Comune', 'Giorno1', 'Pranzo Giorno1', 'Giorno2', 'Pranzo Giorno2', 'Giorno3', 'Pranzo Giorno3', 'Giorno4', 'Pranzo Giorno4', 'Ritiro bimbo', 'Parentela','Foto'])
+                #aggiorna il file CSV con il dataframe vuoto
+                df.to_csv('dati_bambini.csv', index=False)
+                st.success('Dataframe resettato!')
 
     #pagina Modifica dati
     if choice == "Modifica Dati":
