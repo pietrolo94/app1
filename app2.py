@@ -3,14 +3,23 @@ import csv
 import pandas as pd
 import plotly.express as px
 
-def crea_dataframe(nome_df, colonne):
-    try:
-        df = pd.read_csv(nome_df + ".csv")
-        return df
-    except:
-        df = pd.DataFrame(columns=colonne)
-        df.to_csv(nome_df + ".csv", index=False)
-        return df
+#crea file csv se non esiste già
+try:
+    file = open('dati_bambini.csv', 'x', newline='')
+    writer = csv.writer(file)
+    writer.writerow(['Nome', 'Cognome', 'Eta', 'Sesso', 'Classe', 'Quota pagata', 'Intolleranze', 'Allergie', 'Email', 'Foto', 'Telefono1', 'Telefono2', 'Indirizzo', 'Cap', 'Comune', 'Giorno1', 'Pranzo giorno1', 'Giorno2', 'Pranzo giorno2', 'Giorno3', 'Pranzo giorno3', 'Giorno4', 'Pranzo giorno4', 'Ritiro bimbo', 'Parentela','Foto'])
+    file.close()
+except FileExistsError:
+
+    pass
+try:
+    file = open('educatori.csv', 'x', newline='')
+    writer = csv.writer(file)
+    writer.writerow(['Nome', 'Cognome', 'Ore giorno1', 'Ore giorno2', 'Ore giorno3', 'Ore giorno4', 'Ore totali', 'Compensi'])
+    file.close()
+except FileExistsError:
+
+    pass
 #funzione modifica cella bambini
 def modifica_cella(df, index, colonna, valore):
     df.at[index, colonna] = valore
@@ -62,9 +71,6 @@ def calcola_compensi(df):
     return df
 def convert_df(df):
    return df.to_csv(index=False).encode('utf-8')
-def aggiungi_dati(df, dati):
-    df = df.append(dati, ignore_index=True)
-    return df
 def main():
     #Setting della pagina
     st.set_page_config(page_title="Palazola", page_icon=":star:", layout="wide")
@@ -72,7 +78,6 @@ def main():
     choice = st.sidebar.selectbox("Scegli una pagina", menu)
     if choice == "Inserimento Dati":
         with st.form(key='my_form', clear_on_submit=True):
-            df = pd.DataFrame(columns=['Nome', 'Cognome', 'Eta', 'Sesso', 'Classe', 'Quota pagata', 'Intolleranze', 'Allergie', 'Email', 'Foto', 'Telefono1', 'Telefono2', 'Indirizzo', 'Cap', 'Comune', 'Giorno1', 'Pranzo Giorno1', 'Giorno2', 'Pranzo Giorno2', 'Giorno3', 'Pranzo Giorno3', 'Giorno4', 'Pranzo Giorno4', 'Ritiro bimbo', 'Parentela','Foto'])
             # Titolo del form
             st.title("**Registrazione** :red[Palazola Camps] :sunglasses:")
             #Anagrafica
@@ -142,13 +147,15 @@ def main():
             #autorizzazione foto
             with col15:
                 foto = st.selectbox("Autorizzazione Foto", ["si", "no"])
-            nuovi_dati={'Nome':[nome],'Cognome':[cognome],'Eta':[eta],'Sesso':[sesso],'Classe':[classe],'Quota pagata':[quota],'Giorno1'}
             submit_button = st.form_submit_button(label='Salva')
 
         #scrive i dati su file quando si clicca sul pulsante 'Salva'
         if submit_button:
-            df=df.append(nome, cognome, eta, sesso, classe, quota, intolleranze, allergie, email, telefono1, telefono2, via, cap, comune, giorno1, pranzo1, giorno2, pranzo2, giorno3, pranzo3, giorno4, pranzo4, ritiro, parente, foto)
+            scrivi_su_file(nome, cognome, eta, sesso, classe, quota, intolleranze, allergie, email, telefono1, telefono2, via, cap, comune, giorno1, pranzo1, giorno2, pranzo2, giorno3, pranzo3, giorno4, pranzo4, ritiro, parente, foto)
             st.success('Dati salvati!')
+
+        #legge i dati dal file CSV e crea un dataframe pandas
+        df = pd.read_csv('dati_bambini.csv')
 
         #visualizza i dati
         st.write('### Elenco bambini registrati')
@@ -158,6 +165,7 @@ def main():
         col19, col20=st.columns(2)
         with col19:
             if st.button('CSV'):
+                df = pd.read_csv('dati_bambini.csv')
                 csv = df.to_csv(index=False)
                 st.download_button(
                     label="Download CSV",
@@ -175,19 +183,19 @@ def main():
         #         file_name='dati_bambini.xlsx',
         #         mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
         #         )
-        # with col20:
-        #     if st.button('Resetta elenco bambini'):
-        #         if st.button("Sei sicuro di voler resettare l'elenco?"):
-        #             #resetta il dataframe a vuoto
-        #             df = pd.DataFrame(columns=['Nome', 'Cognome', 'Eta', 'Sesso', 'Classe', 'Quota pagata', 'Intolleranze', 'Allergie', 'Email', 'Foto', 'Telefono1', 'Telefono2', 'Indirizzo', 'Cap', 'Comune', 'Giorno1', 'Pranzo Giorno1', 'Giorno2', 'Pranzo Giorno2', 'Giorno3', 'Pranzo Giorno3', 'Giorno4', 'Pranzo Giorno4', 'Ritiro bimbo', 'Parentela','Foto'])
-        #             #aggiorna il file CSV con il dataframe vuoto
-        #             df.to_csv('dati_bambini.csv', index=False)
-        #             st.success('Dataframe resettato!')
+        with col20:
+            if st.button('Resetta elenco bambini'):
+                #resetta il dataframe a vuoto
+                df = pd.DataFrame(columns=['Nome', 'Cognome', 'Eta', 'Sesso', 'Classe', 'Quota pagata', 'Intolleranze', 'Allergie', 'Email', 'Foto', 'Telefono1', 'Telefono2', 'Indirizzo', 'Cap', 'Comune', 'Giorno1', 'Pranzo Giorno1', 'Giorno2', 'Pranzo Giorno2', 'Giorno3', 'Pranzo Giorno3', 'Giorno4', 'Pranzo Giorno4', 'Ritiro bimbo', 'Parentela','Foto'])
+                #aggiorna il file CSV con il dataframe vuoto
+                df.to_csv('dati_bambini.csv', index=False)
+                st.success('Dataframe resettato!')
 
     #pagina Modifica dati
     if choice == "Modifica Dati":
         #visualizza i dati
         st.write('### Elenco bambini registrati')
+        df = pd.read_csv('dati_bambini.csv')
         st.write(df)
 
         #sezione per modificare una cella del dataframe
