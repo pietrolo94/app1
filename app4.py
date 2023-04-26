@@ -41,14 +41,14 @@ def modifica_cella_ed(df, index, colonna, valore):
     st.success('Valore modificato!')
 # Funzione per modificare un valore nella tabella delle spese
 def modify_expense_data(row_index, new_value):
-    df = pd.read_csv('Spese.csv')
+    df = pd.read_csv('spese.csv')
     df.at[row_index, 'Importo'] = new_value
-    df.to_csv('Spese.csv', index=False)
+    df.to_csv('spese.csv', index=False)
 # Funzione per rimuovere una riga dalla tabella delle spese
 def remove_expense_data(row_index):
-    df = pd.read_csv('Spese.csv')
+    df = pd.read_csv('spese.csv')
     df.drop(row_index, inplace=True)
-    df.to_csv('Spese.csv', index=False)
+    df.to_csv('spese.csv', index=False)
 #funzione per scrivere i dati su file (spostata nella pagina Registrazione)
 def scrivi_su_file(nome, cognome, eta, sesso, classe, quota, diete, allergie, email, telefono1, telefono2, indirizzo, cap, comune, giorno1, pranzo1, giorno2, pranzo2, giorno3, pranzo3, giorno4, pranzo4, giorno5, pranzo5, giorno6, pranzo6, giorno7, pranzo7, giorno8, pranzo8, tesseramento, ritiro, parente, foto):
     #controlla se il bambino è già presente nel file
@@ -81,7 +81,7 @@ def scrivi_su_file_ed(nome_ed, cognome_ed, ore_giorno1, ore_giorno2, ore_giorno3
     st.success('Dati salvati!')
 #funzione per scrivere su file spese
 def save_expense_data(tipo_spesa, importo):
-    with open("Spese.csv", "a", newline="") as file:
+    with open("spese.csv", "a", newline="") as file:
         writer = csv.writer(file)
         writer.writerow([tipo_spesa, importo])
     st.success("Spesa aggiunta con successo!")
@@ -339,7 +339,7 @@ def main():
     if choice == "Spese":
         st.title("Registrazione delle spese")
         st.write("### Elenco spese")
-        df = pd.read_csv('Spese.csv')
+        df = pd.read_csv('spese.csv')
         st.write(df)
 
         with st.form(key="spese_form", clear_on_submit=True):
