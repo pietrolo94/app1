@@ -310,7 +310,8 @@ def main():
         #Scrivi i dati su file
         if invio:
             scrivi_su_file_ed(nome_ed,cognome_ed,ore_giorno1, ore_giorno2,ore_giorno3,ore_giorno4, ore_giorno5, ore_giorno6,ore_giorno7,ore_giorno8)
-
+            df = pd.read_csv('educatori.csv')
+            st.write(df1)
         #sezione per modificare una cella del dataframe educatori
         st.write('### Modifica valore')
         index_modifica = st.number_input('Inserisci l\'indice della riga da modificare', value=0, min_value=0, max_value=len(df1))
@@ -330,7 +331,7 @@ def main():
         if reset:
             df1 = pd.DataFrame(columns=['Nome', 'Cognome', 'Ore giorno1', 'Ore giorno2', 'Ore giorno3', 'Ore giorno4','Ore giorno5', 'Ore giorno6', 'Ore giorno7','Ore giorno8', 'Ore totali', 'Compensi'])
             df1.to_csv('educatori.csv', index=False)
-
+            st.success('Elenco resettato')
         #     #Visualizza il dataframe resettato
         #     st.write('### Elenco educatori')
         #     df1 = pd.read_csv('educatori.csv')
