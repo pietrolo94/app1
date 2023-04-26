@@ -306,7 +306,7 @@ def main():
             if giorno == 'Tutti i giorni':
                 df = pd.read_csv('dati_bambini.csv')
                 df1 = pd.read_csv('educatori.csv')
-                df2 = pd.read_csv('Spese.csv')
+                df2 = pd.read_csv('spese.csv')
                 df_giorno = df
                 df = df_giorno.rename(columns={'Classe': 'Numero Bambini'})
                 num_bambini_per_classe = df['Numero Bambini'].value_counts()
