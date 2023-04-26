@@ -1,4 +1,61 @@
 Nome,Cognome,Eta,Sesso,Classe,Quota pagata,Diete,Allergie,Email,Telefono1,Telefono2,Indirizzo,Cap,Comune,Giorno1,Pranzo giorno1,Giorno2,Pranzo giorno2,Giorno3,Pranzo giorno3,Giorno4,Pranzo giorno4,Giorno5,Pranzo giorno5,Giorno6,Pranzo giorno6,Giorno7,Pranzo giorno7,Giorno8,Pranzo giorno8,Tesseramento,Ritiro bimbo,Parentela,Foto
-Lorenzo,Atzeni,3,Maschio,Materna,25,,,,,,,,,si,si,no,no,no,no,no,no,no,no,si,no,no,no,no,no,0,,,si
-Anastasia Maria,Bassi Andreasi,4,Femmina,Materna,120,,,,,,,,,si,si,si,si,no,no,si,si,no,no,no,no,no,no,no,no,0,,,si
-Giuseppe,Affinita,6,Maschio,Materna,35,,,,,,,,,no,no,no,no,no,no,si,si,no,no,no,no,no,no,no,no,0,,,si
+Gabriel,Bulacu Aran,5,Maschio,Materna,70,,,,,,,,,si,si,no,no,no,no,si,si,no,no,si,no,no,no,no,no,3,,,si
+Amelia,Rago,6,Femmina,Materna,135,,,,,,,,,si,si,si,si,si,si,si,si,no,no,no,no,no,no,no,no,3,,,si
+Leonardo,Panizzo,8,Maschio,Elementari,255,,,,,,,,,si,si,si,si,si,si,si,si,si,si,si,si,si,si,si,si,3,,,si
+Alice,Affinita,7,Femmina,Elementari,255,,,,,,,,,si,si,si,si,si,si,si,si,si,si,si,si,si,si,si,si,3,,,si
+Giuseppe,Affinita,5,Maschio,Materna,255,,,,,,,,,si,si,si,si,si,si,si,si,si,si,si,si,si,si,si,si,3,,,si
+Mia,Mantovani,3,Femmina,Materna,135,,,,,,,,,no,no,no,no,no,no,no,no,si,si,si,si,si,si,si,si,3,,,si
+Alessandro,Benedetti,6,Maschio,Elementari,210,,,,,,,,,si,si,si,si,si,si,no,no,si,si,si,si,si,si,si,si,3,,,si
+Agnese,Mischi,7,Femmina,Elementari,210,,,,,,,,,no,no,no,no,si,si,si,si,si,si,si,si,si,si,si,si,3,,,si
+Nicol,Gabaglio,7,Femmina,Elementari,135,,,,,,,,,no,no,no,no,no,no,no,no,si,si,si,si,si,si,si,si,3,,,si
+Marco,Benedetti,9,Maschio,Elementari,210,,,,,,,,,si,si,si,si,si,si,no,no,si,si,si,si,si,si,si,si,3,,,si
+Danielle,Gabaglio,5,Femmina,Materna,135,,,,,,,,,no,no,no,no,no,no,no,no,si,si,si,si,si,si,si,si,3,,,si
+Noemi,Collina,10,Femmina,Elementari,80,,,,,,,,,si,no,si,no,si,no,si,no,no,no,no,no,no,no,no,no,3,,,si
+Emily,Abraham,5,Femmina,Materna,135,,,,,,,,,si,si,si,si,si,si,si,si,no,no,no,no,no,no,no,no,3,,,si
+Asia,Loddo,10,Femmina,Elementari,150,,,,,,,,,si,si,si,si,si,si,si,si,no,no,no,no,no,no,no,no,3,,,si
+Riccardo,Rubino,4,Maschio,Materna,295,,,,,,,,,si,si,si,si,si,si,si,si,si,si,si,si,si,si,si,si,3,,,si
+Filippo,Garzone,3,Maschio,Materna,150,,,,,,,,,si,si,si,si,si,si,si,si,no,no,no,no,no,no,no,no,3,,,si
+Joel,Cerrito,8,Femmina,Elementari,80,,,,,,,,,si,no,si,no,si,no,si,no,no,no,no,no,no,no,no,no,3,,,si
+Nicholas,Cerrito,9,Maschio,Elementari,80,,,,,,,,,si,no,si,no,si,no,si,no,no,no,no,no,no,no,no,no,3,,,si
+Filippo,Medini Lodi,8,Maschio,Elementari,135,,,,,,,,,si,si,si,si,si,si,si,si,no,no,no,no,no,no,no,no,3,,,si
+Luca,Medini Lodi,6,Maschio,Elementari,135,,,,,,,,,si,si,si,si,si,si,si,si,no,no,no,no,no,no,no,no,3,,,si
+Tudor,Postolachi,9,Maschio,Elementari,135,,,,,,,,,no,no,si,si,no,no,si,si,no,no,si,si,no,no,si,si,3,,,si
+Massimo,Portela de Novaes,3,Maschio,Materna,255,,,,,,,,,si,si,si,si,si,si,si,si,si,si,si,si,si,si,si,si,3,,,si
+Giulia,Blasini,9,Femmina,Elementari,170,,,,,,,,,no,no,si,si,no,no,no,no,si,si,si,si,si,si,si,si,3,,,si
+Thomas,Lulay,5,Maschio,Materna,255,,,,,,,,,si,si,si,si,si,si,si,si,si,si,si,si,si,si,si,si,3,,,si
+Giada,Calzolari,5,Femmina,Materna,215,,,,,,,,,si,si,si,no,si,si,si,no,si,si,si,no,si,si,si,no,3,,,si
+Tommaso,Baldini,6,Maschio,Materna,255,,,,,,,,,si,si,si,si,si,si,si,si,si,si,si,si,si,si,si,si,3,,,si
+Beatrice,Onofri,5,Femmina,Materna,135,,,,,,,,,si,si,no,no,si,si,no,no,no,no,si,si,no,no,si,si,3,,,si
+Onofri,Leonardo,3,Maschio,Materna,135,,,,,,,,,si,si,no,no,si,si,no,no,no,no,si,si,no,no,si,si,3,,,si
+Lorenzo,Fallone,8,Maschio,Elementari,76,,,,,,,,,no,no,si,si,no,no,no,no,si,si,si,si,si,si,no,no,3,,,si
+Andrea,Brosco,3,Maschio,Materna,255,,,,,,,,,si,si,si,si,si,si,si,si,si,si,si,si,si,si,si,si,3,,,si
+Alessio,La Barbera,8,Maschio,Elementari,255,,,,,,,,,si,si,si,si,si,si,si,si,si,si,si,si,si,si,si,si,3,,,si
+Laura,Lepri,12,Femmina,Medie,60,,,,,,,,,si,si,si,si,si,si,si,si,si,si,si,si,si,si,si,si,3,,,si
+Alex,Forlani,11,Maschio,Medie,60,,,,,,,,,no,no,si,no,no,no,si,no,no,no,no,no,si,no,no,no,3,,,si
+Federico,Forlani,11,Maschio,Medie,60,,,,,,,,,si,si,si,no,no,no,si,no,no,no,no,no,si,no,no,no,3,,,si
+Vincenzo,Barbagallo,7,Maschio,Elementari,105,,,,,,,,,no,no,no,no,no,no,no,no,si,si,si,si,si,si,no,no,3,,,si
+Carlotta,Virga,7,Femmina,Elementari,60,,,,,,,,,no,no,no,no,si,no,no,no,no,no,no,no,si,no,si,no,3,,,si
+Giorgia,Bertocchi,6,Femmina,Elementari,70,,,,,,,,,si,si,no,no,no,no,si,si,no,no,no,no,no,no,no,no,3,,,si
+Leonardo,Chiusolo,3,Maschio,Materna,70,,,,,,,,,no,no,no,no,si,si,no,no,no,no,no,no,no,no,si,si,3,,,si
+Riccardo,Chiusolo,5,Maschio,Materna,70,,,,,,,,,no,no,no,no,si,si,no,no,no,no,no,no,no,no,si,si,3,,,si
+Filippo,Borsari,3,Maschio,Materna,70,,,,,,,,,no,no,no,no,si,si,no,no,no,no,no,no,no,no,si,si,3,,,si
+Edoardo,Biagi,3,Maschio,Materna,35,,,,,,,,,no,no,no,no,si,si,no,no,no,no,no,no,no,no,no,no,3,,,si
+Lorenzo,Pietrocola,4,Maschio,Materna,60,,,,,,,,,si,si,si,si,si,si,no,no,no,no,no,no,no,no,no,no,3,,,si
+Leonardo,Pietrocola,6,Maschio,Elementari,60,,,,,,,,,si,si,si,si,si,si,no,no,no,no,no,no,no,no,no,no,3,,,si
+Alessandro,Cavalieri,7,Maschio,Elementari,135,,,,,,,,,si,si,si,si,si,si,si,si,no,no,no,no,no,no,no,no,3,,,si
+Leonardo,Ciarrocchi,6,Maschio,Elementari,255,,,,,,,,,si,si,si,si,si,si,si,si,si,si,si,si,si,si,si,si,3,,,si
+Marika,Tedesco,7,Femmina,Elementari,35,,,,,,,,,no,no,no,no,no,no,si,si,no,no,no,no,no,no,no,no,3,,,si
+Chiara,Tedesco,5,Femmina,Materna,35,,,,,,,,,no,no,no,no,no,no,si,si,no,no,no,no,no,no,no,no,3,,,si
+Vittoria,Venturi,7,Femmina,Elementari,70,,,,,,,,,no,no,no,no,si,si,si,si,no,no,no,no,no,no,no,no,3,,,si
+Federico,Giannelli,3,Maschio,Materna,170,,,,,,,,,no,no,si,si,si,si,no,no,si,si,si,si,si,si,no,no,3,,,si
+Tommaso,Santi,4,Maschio,Materna,35,,,,,,,,,no,no,no,no,si,si,no,no,no,no,no,no,no,no,no,no,3,,,si
+Gioele,Santi,4,Maschio,Materna,35,,,,,,,,,no,no,no,no,si,si,no,no,no,no,no,no,no,no,no,no,3,,,si
+Giulia,Baldini,4,Femmina,Materna,135,,,,,,,,,no,no,no,no,no,no,no,no,si,si,si,si,si,si,si,si,3,,,si
+Clelia,Casalini,6,Femmina,Elementari,105,,,,,,,,,no,no,no,no,no,no,no,no,si,si,si,si,si,si,no,no,3,,,si
+Joele,Casalini,3,Maschio,Materna,140,,,,,,,,,no,no,no,no,no,no,no,no,si,si,si,si,si,si,si,si,3,,,si
+Elena,Musu,7,Femmina,Elementari,70,,,,,,,,,no,no,no,no,no,no,no,no,no,no,si,si,si,si,no,no,3,,,si
+Sara,Musu,5,Maschio,Materna,70,,,,,,,,,no,no,no,no,no,no,no,no,no,no,si,si,si,si,no,no,3,,,si
+Diego,Comparone,8,Maschio,Elementari,70,,,,,,,,,no,no,no,no,no,no,no,no,no,no,no,no,si,si,si,si,3,,,si
+Diego,Zardini,7,Maschio,Elementari,70,,,,,,,,,no,no,no,no,no,no,no,no,no,no,si,si,si,si,no,no,3,,,si
+Celeste,Zardini,5,Femmina,Materna,70,,,,,,,,,no,no,no,no,no,no,no,no,no,no,si,si,si,si,no,no,3,,,si
+Nicolas,Tozzi,5,Maschio,Materna,35,,,,,,,,,no,no,no,no,no,no,no,no,no,no,no,no,no,no,si,si,3,,,si

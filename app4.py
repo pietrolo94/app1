@@ -52,16 +52,16 @@ def main():
             col5, col6, col7, col8 = st.columns(4)
             # Campo età
             with col5:
-                eta = st.number_input("Età",min_value=3, max_value=11)
+                eta = st.number_input("Età", value=6, min_value=3, max_value=14)
             # Campo sesso
             with col6:
                 sesso = st.selectbox("Sesso", ["Maschio", "Femmina"])
             # Campo classe
             with col7:
-                classe = st.selectbox("Classe", ["Nido", "Materna","Elementari","Medie"])
+                classe = st.selectbox("Classe", ["Elementari","Materna","Medie","Nido"])
             #campo quota pagata
             with col8:
-                quota = st.number_input("Quota pagata", min_value=15)
+                quota = st.number_input("Quota pagata",value=135, min_value=0,max_value=500)
             #Giorni e pranzi
             col1, col2, col3, col4 = st.columns(4)
             with col1:
@@ -92,7 +92,7 @@ def main():
                 pranzo8 = st.selectbox("Pranzo Giorno8", ["si", "no"])
             
             #tesseramento
-            tesseramento = st.number_input("Costo tesseramento",value=5)
+            tesseramento = st.number_input("Costo tesseramento",value=3)
 
             # Campo intolleranze/diete
             diete = st.text_input("Diete")
@@ -164,7 +164,7 @@ def main():
         with col20:
             if st.button('Resetta elenco bambini'):
                 #resetta il dataframe a vuoto
-                df = pd.DataFrame(columns=['Nome', 'Cognome', 'Eta', 'Sesso', 'Classe', 'Quota pagata', 'Diete', 'Allergie', 'Email', 'Telefono1', 'Telefono2', 'Indirizzo', 'Cap', 'Comune', 'Giorno1', 'Pranzo Giorno1', 'Giorno2', 'Pranzo Giorno2', 'Giorno3', 'Pranzo Giorno3', 'Giorno4', 'Pranzo Giorno4','Giorno5', 'Pranzo giorno5', 'Giorno6', 'Pranzo giorno6', 'Giorno7', 'Pranzo giorno7', 'Giorno8', 'Pranzo giorno8', 'Tesseramento', 'Ritiro bimbo', 'Parentela', 'Foto'])
+                df = pd.DataFrame(columns=['Nome', 'Cognome', 'Eta', 'Sesso', 'Classe', 'Quota pagata', 'Diete', 'Allergie', 'Email', 'Telefono1', 'Telefono2', 'Indirizzo', 'Cap', 'Comune', 'Giorno1', 'Pranzo giorno1', 'Giorno2', 'Pranzo giorno2', 'Giorno3', 'Pranzo giorno3', 'Giorno4', 'Pranzo giorno4','Giorno5', 'Pranzo giorno5', 'Giorno6', 'Pranzo giorno6', 'Giorno7', 'Pranzo giorno7', 'Giorno8', 'Pranzo giorno8', 'Tesseramento', 'Ritiro bimbo', 'Parentela', 'Foto'])
                 #aggiorna il file CSV con il dataframe vuoto
                 df.to_csv('dati_bambini.csv', index=False)
                 st.success('Dataframe resettato!')
@@ -333,8 +333,8 @@ def main():
                 ore_totali = df1['Ore totali'].sum()
                 st.write("Ore totali educatori: {}".format(round(ore_totali, 2)))
                 spese = df2['Importo'].sum()
-                costo_pranzi = df['Pranzo giorno1'].value_counts()["si"]+df['Pranzo giorno2'].value_counts()["si"]+df['Pranzo giorno3'].value_counts()["si"]+df['Pranzo giorno4'].value_counts()["si"]+df['Pranzo giorno5'].value_counts()["si"]+df['Pranzo giorno6'].value_counts()["si"]+df['Pranzo giorno7'].value_counts()["si"]+df['Pranzo giorno8'].value_counts()["si"]
-                st.write('Costo totale pranzi: {} euro'.format(round(costo_pranzi*7.5, 2)))
+                costo_pranzi = (df['Pranzo giorno1'].value_counts()["si"]+df['Pranzo giorno2'].value_counts()["si"]+df['Pranzo giorno3'].value_counts()["si"]+df['Pranzo giorno4'].value_counts()["si"]+df['Pranzo giorno5'].value_counts()["si"]+df['Pranzo giorno6'].value_counts()["si"]+df['Pranzo giorno7'].value_counts()["si"]+df['Pranzo giorno8'].value_counts()["si"])*7.5
+                st.write('Costo totale pranzi: {} euro'.format(round(costo_pranzi, 2)))
                 st.write('Totale spese:{} euro'.format(round(spese, 2)))
                 incasso_netto = quota_totale-compensi_totali-spese-costo_tesseramenti-costo_pranzi
                 st.write('Incasso netto: {} euro'.format(round(incasso_netto, 2)))
