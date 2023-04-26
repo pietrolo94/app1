@@ -319,7 +319,7 @@ def main():
                 num_bambini_tot=df_giorno['Nome'].count()
                 st.write('Numero toale bimbi: {}'.format(round(num_bambini_tot,1)))
                 eta_media = df_giorno['Eta'].mean()
-                st.write('Età media dei bambini registrati: {} anni'.format(round(eta_media, 1)))
+                st.write('Età media dei bambini registrati: {} anni'.format(round(eta_media, 2)))
                 quota_media = df_giorno['Quota pagata'].mean()
                 st.write('Quota media pagata dai bambini: {} euro'.format(round(quota_media, 2)))
                 quota_totale = df_giorno['Quota pagata'].sum()
@@ -333,14 +333,14 @@ def main():
                 ore_totali = df1['Ore totali'].sum()
                 st.write("Ore totali educatori: {}".format(round(ore_totali, 2)))
                 spese = df2['Importo'].sum()
-                costo_pranzi = int(df['Pranzo giorno1'].value_counts()+df['Pranzo giorno2'].value_counts()+df['Pranzo giorno3'].value_counts()+df['Pranzo giorno4'].value_counts()+df['Pranzo giorno5'].value_counts()+df['Pranzo giorno6'].value_counts()+df['Pranzo giorno7'].value_counts()+df['Pranzo giorno8'].value_counts())*7
-                st.write('Costo totale pranzi: {} euro'.format(round(costo_pranzi, 2)))
+                costo_pranzi = df['Pranzo giorno1'].value_counts()["si"]+df['Pranzo giorno2'].value_counts()["si"]+df['Pranzo giorno3'].value_counts()["si"]+df['Pranzo giorno4'].value_counts()["si"]+df['Pranzo giorno5'].value_counts()["si"]+df['Pranzo giorno6'].value_counts()["si"]+df['Pranzo giorno7'].value_counts()["si"]+df['Pranzo giorno8'].value_counts()["si"]
+                st.write('Costo totale pranzi: {} euro'.format(round(costo_pranzi*7.5, 2)))
                 st.write('Totale spese:{} euro'.format(round(spese, 2)))
-                incasso_netto = quota_totale-compensi_totali-spese-costo_tesseramenti-costo_pranzi
+                incasso_netto = quota_totale-compensi_totali-spese-costo_tesseramenti
                 st.write('Incasso netto: {} euro'.format(round(incasso_netto, 2)))
                 df_report = pd.DataFrame({'Numero totale bambini':[num_bambini_tot],'Eta media':[eta_media], 
                                           'Quota media':[quota_media],'Incasso lordo':[quota_totale], 'Compensi educatori':[compensi_totali],
-                                          'Ore totali educatori':[ore_totali],'Totale spese':[spese],'Costo tesseramento bimbi':[costo_tesseramenti],'Costo pranzi':[costo_pranzi],'Incasso netto':[incasso_netto]})
+                                          'Ore totali educatori':[ore_totali],'Totale spese':[spese],'Costo tesseramento bimbi':[costo_tesseramenti],'Incasso netto':[incasso_netto]})
                 st.write(df_report)
                 csv = convert_df(df_report)
                 st.download_button(
