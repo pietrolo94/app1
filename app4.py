@@ -336,7 +336,7 @@ def main():
                 costo_pranzi = df['Pranzo giorno1'].value_counts()["si"]+df['Pranzo giorno2'].value_counts()["si"]+df['Pranzo giorno3'].value_counts()["si"]+df['Pranzo giorno4'].value_counts()["si"]+df['Pranzo giorno5'].value_counts()["si"]+df['Pranzo giorno6'].value_counts()["si"]+df['Pranzo giorno7'].value_counts()["si"]+df['Pranzo giorno8'].value_counts()["si"]
                 st.write('Costo totale pranzi: {} euro'.format(round(costo_pranzi*7.5, 2)))
                 st.write('Totale spese:{} euro'.format(round(spese, 2)))
-                incasso_netto = quota_totale-compensi_totali-spese-costo_tesseramenti
+                incasso_netto = quota_totale-compensi_totali-spese-costo_tesseramenti-costo_pranzi
                 st.write('Incasso netto: {} euro'.format(round(incasso_netto, 2)))
                 df_report = pd.DataFrame({'Numero totale bambini':[num_bambini_tot],'Eta media':[eta_media], 
                                           'Quota media':[quota_media],'Incasso lordo':[quota_totale], 'Compensi educatori':[compensi_totali],
