@@ -1,7 +1,6 @@
 import streamlit as st
 import csv
 import pandas as pd
-import plotly.express as px
 
 #crea file csv se non esiste già
 try:
@@ -380,8 +379,8 @@ def main():
                 num_bambini_per_classe = df['Numero Bambini'].value_counts()
                 st.write('### Elenco Bambini')
                 st.write(df_giorno[['Nome', 'Cognome', 'Eta', 'Classe', 'Telefono1', 'Telefono2']])
-                fig = px.bar(num_bambini_per_classe, x=num_bambini_per_classe.index, y=num_bambini_per_classe.values, labels={'x': 'Classe', 'y':'Numero di bambini'})
-                st.plotly_chart(fig, use_container_width=True)
+                #fig = px.bar(num_bambini_per_classe, x=num_bambini_per_classe.index, y=num_bambini_per_classe.values, labels={'x': 'Classe', 'y':'Numero di bambini'})
+                #st.plotly_chart(fig, use_container_width=True)
                 
                 #st.write(num_bambini_per_classe)
                 num_bambini_tot=df_giorno['Nome'].count()
