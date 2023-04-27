@@ -350,7 +350,7 @@ def main():
                 st.write('Incasso netto: {} euro'.format(round(incasso_netto, 2)))
                 df_report = pd.DataFrame({'Numero totale bambini':[num_bambini_tot],'Eta media':[eta_media], 
                                           'Quota media':[quota_media],'Incasso lordo':[quota_totale], 'Compensi educatori':[compensi_totali],
-                                          'Ore totali educatori':[ore_totali],'Totale spese':[spese],'Costo tesseramento bimbi':[costo_tesseramenti],'Incasso netto':[incasso_netto]})
+                                          'Ore totali educatori':[ore_totali],'Totale spese':[spese],'Costo tesseramento bimbi':[costo_tesseramenti],'Costo pranzi':[costo_pranzi],'Incasso netto':[incasso_netto]})
                 st.write(df_report)
                 if st.button('Scarica report finale'):
                     excel_file = 'Report_finale.xlsx'

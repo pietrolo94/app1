@@ -70,7 +70,7 @@ def calcola_ore_totali(df):
     return df
 #funzione per calcolare la retribuzione di ogni educatore
 def calcola_compensi(df):
-    df['Compensi'] = (df['Ore giorno1'] + df['Ore giorno2'] + df['Ore giorno3'] + df['Ore giorno4']+ df['Ore giorno5'] + df['Ore giorno6'] + df['Ore giorno7'] + df['Ore giorno8'])*9
+    df['Compensi'] = (df['Ore giorno1'] + df['Ore giorno2'] + df['Ore giorno3'] + df['Ore giorno4']+ df['Ore giorno5'] + df['Ore giorno6'] + df['Ore giorno7'] + df['Ore giorno8'])*8
     return df
 def convert_df(df):
    return df.to_csv(index=False).encode('utf-8')
