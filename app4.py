@@ -2,6 +2,7 @@ import streamlit as st
 import csv
 import pandas as pd
 from funzioni import *
+import io
 
 #crea file csv se non esiste già
 try:
@@ -142,14 +143,18 @@ def main():
         st.write('### Scarica dati')
         col19, col20=st.columns(2)
         with col19:
-            if st.button('CSV'):
-                df = pd.read_csv('dati_bambini.csv')
-                csv = df.to_csv(index=False)
+            if st.button('Scarica elenco bambini'):
+                excel_file = 'Palazola_.xlsx'
+                output = io.BytesIO()
+                writer = pd.ExcelWriter(output, engine='xlsxwriter')
+                df.to_excel(writer,sheet_name='Elenco_tot', index=False)
+                writer.save()
+                output.seek(0)
                 st.download_button(
-                    label="Download CSV",
-                    data=csv,
-                    file_name='dati_bambini.csv',
-                    mime='text/csv'
+                    label="Download Xlsx",
+                    data=output,
+                    file_name=excel_file,
+                    mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
                 )
         #     if st.button('Excel'):
         #         df = pd.read_csv('dati_bambini.csv')
@@ -210,14 +215,19 @@ def main():
         ore_totali = df1['Ore totali'].sum()
         st.write("Ore totali educatori: {}".format(round(ore_totali, 2)))
         #Dowload CSV educatori
-        csv = convert_df(df1)
-        st.download_button(
-            "Download csv educatori",
-            csv,
-            "Totale_educatori.csv",
-            "text/csv",
-            key='download-csv'
-        )
+        if st.button('Scarica report educatori', key=1):
+            excel_file = 'Report_educatori.xlsx'
+            output = io.BytesIO()
+            writer = pd.ExcelWriter(output, engine='xlsxwriter')
+            df1.to_excel(writer,sheet_name='Report_educatori', index=False)
+            writer.save()
+            output.seek(0)
+            st.download_button(
+                label="Download Xlsx",
+                data=output,
+                file_name=excel_file,
+                mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+            )
         #Form per inserire i dati degli educatori
         st.write('### Inserisci dati educatore')
         with st.form(key='educatore_form', clear_on_submit=True):
@@ -333,7 +343,7 @@ def main():
                 ore_totali = df1['Ore totali'].sum()
                 st.write("Ore totali educatori: {}".format(round(ore_totali, 2)))
                 spese = df2['Importo'].sum()
-                costo_pranzi = (df['Pranzo giorno1'].value_counts()["si"]+df['Pranzo giorno2'].value_counts()["si"]+df['Pranzo giorno3'].value_counts()["si"]+df['Pranzo giorno4'].value_counts()["si"]+df['Pranzo giorno5'].value_counts()["si"]+df['Pranzo giorno6'].value_counts()["si"]+df['Pranzo giorno7'].value_counts()["si"]+df['Pranzo giorno8'].value_counts()["si"])*7.5
+                costo_pranzi = (count_value(df,'Pranzo giorno1','si')+count_value(df,'Pranzo giorno2','si')+count_value(df,'Pranzo giorno3','si')+count_value(df,'Pranzo giorno4','si')+count_value(df,'Pranzo giorno5','si')+count_value(df,'Pranzo giorno6','si')+count_value(df,'Pranzo giorno7','si')+count_value(df,'Pranzo giorno8','si'))*7.5
                 st.write('Costo totale pranzi: {} euro'.format(round(costo_pranzi, 2)))
                 st.write('Totale spese:{} euro'.format(round(spese, 2)))
                 incasso_netto = quota_totale-compensi_totali-spese-costo_tesseramenti-costo_pranzi
@@ -342,14 +352,19 @@ def main():
                                           'Quota media':[quota_media],'Incasso lordo':[quota_totale], 'Compensi educatori':[compensi_totali],
                                           'Ore totali educatori':[ore_totali],'Totale spese':[spese],'Costo tesseramento bimbi':[costo_tesseramenti],'Incasso netto':[incasso_netto]})
                 st.write(df_report)
-                csv = convert_df(df_report)
-                st.download_button(
-                "Download report totale csv",
-                csv,
-                "Report_totale.csv",
-                "text/csv",
-                key='download-csv'
-                )
+                if st.button('Scarica report finale'):
+                    excel_file = 'Report_finale.xlsx'
+                    output = io.BytesIO()
+                    writer = pd.ExcelWriter(output, engine='xlsxwriter')
+                    df_report.to_excel(writer,sheet_name='Report_finale', index=False)
+                    writer.save()
+                    output.seek(0)
+                    st.download_button(
+                        label="Download Xlsx",
+                        data=output,
+                        file_name=excel_file,
+                        mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+                    )
             else:
                 #filtra il DataFrame per il giorno selezionato
                 df_giorno = df.loc[df['{}' .format(giorno)] == 'si']
@@ -359,10 +374,41 @@ def main():
                 df_giorno_elementari_medie = df_giorno.loc[df_giorno['Classe'].isin(['Elementari', 'Medie'])]
                 #visualizza i dati
                 st.write('### Elenco bambini{}:'.format('' if giorno=='Tutti i giorni' else '  {}'.format(giorno)))
-                df_giorno_nido_materna = df_giorno_nido_materna.assign(Colonna1='', Colonna2='')
+                st.write('#### Elenco bimbi materna-nido')
+                df_giorno_nido_materna = df_giorno_nido_materna.assign(Primo='', Secondo='')
                 st.write(df_giorno_nido_materna)
-                df_giorno_elementari_medie = df_giorno_elementari_medie.assign(Colonna1='', Colonna2='')
+                st.write('#### Elenco bimbi elementari-medie')
+                df_giorno_elementari_medie = df_giorno_elementari_medie.assign(Primo='', Secondo='')
                 st.write(df_giorno_elementari_medie)
+                col31, col32 = st.columns(2)
+                with col31:
+                    if st.button('Scarica elenco materna-nido', key=1):
+                        excel_file = 'Materna-nido_giorno{}.xlsx'.format(giorno[-1])
+                        output = io.BytesIO()
+                        writer = pd.ExcelWriter(output, engine='xlsxwriter')
+                        df_giorno_nido_materna.to_excel(writer,sheet_name='Materna-nido_giorno{}'.format(giorno[-1]), index=False)
+                        writer.save()
+                        output.seek(0)
+                        st.download_button(
+                            label="Download Xlsx",
+                            data=output,
+                            file_name=excel_file,
+                            mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+                        )
+                with col32:    
+                    if st.button('Scarica elenco elementari_medie', key=2):
+                        excel_file = 'Emelentari_medie_giorno{}.xlsx'.format(giorno[-1])
+                        output = io.BytesIO()
+                        writer = pd.ExcelWriter(output, engine='xlsxwriter')
+                        df_giorno_elementari_medie.to_excel(writer,'Emelentari_medie_giorno{}'.format(giorno[-1]), index=False)
+                        writer.save()
+                        output.seek(0)
+                        st.download_button(
+                            label="Download Xlsx",
+                            data=output,
+                            file_name=excel_file,
+                            mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+                        )
                 df_giorno = df_giorno.rename(columns={'Classe': 'Numero Bambini'})
                 num_bambini_per_classe =df_giorno['Numero Bambini'].value_counts()
                 # fig = px.bar(num_bambini_per_classe, x=num_bambini_per_classe.index, y=num_bambini_per_classe.values, labels={'x': 'Classe', 'y':'Numero di bambini'})

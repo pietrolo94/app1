@@ -1,7 +1,12 @@
 import streamlit as st
 import csv
 import pandas as pd
-
+#funzione conta valori
+def count_value(df, column, value):
+    if value not in df[column].unique():
+        return 0
+    else:
+        return df[column].value_counts()[value]
 #funzione modifica cella bambini
 def modifica_cella(df, index, colonna, valore):
     df.at[index, colonna] = valore
