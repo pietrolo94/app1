@@ -284,6 +284,19 @@ def main():
         st.write("### Elenco spese")
         df = pd.read_csv('spese.csv')
         st.write(df)
+        if st.button('Scarica lista spese'):
+            excel_file = 'Spese.xlsx'
+            output = io.BytesIO()
+            writer = pd.ExcelWriter(output, engine='xlsxwriter')
+            df.to_excel(writer,sheet_name='Spese', index=False)
+            writer.save()
+            output.seek(0)
+            st.download_button(
+                label="Download Xlsx",
+                data=output,
+                file_name=excel_file,
+                mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+            )
 
         with st.form(key="spese_form", clear_on_submit=True):
             tipo_spesa = st.text_input("Tipo di spesa", key="tipo_spesa")
