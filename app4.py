@@ -352,6 +352,7 @@ def main():
                                           'Quota media':[quota_media],'Incasso lordo':[quota_totale], 'Compensi educatori':[compensi_totali],
                                           'Ore totali educatori':[ore_totali],'Totale spese':[spese],'Costo tesseramento bimbi':[costo_tesseramenti],'Costo pranzi':[costo_pranzi],'Incasso netto':[incasso_netto]})
                 st.write(df_report)
+                #Download report finale
                 if st.button('Scarica report finale'):
                     excel_file = 'Report_finale.xlsx'
                     output = io.BytesIO()
