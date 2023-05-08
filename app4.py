@@ -3,6 +3,7 @@ import csv
 import pandas as pd
 from funzioni import *
 import io
+import xlsxwriter
 
 #crea file csv se non esiste già
 try:
