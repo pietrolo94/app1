@@ -150,6 +150,7 @@ def main():
                 writer = pd.ExcelWriter(output, engine='xlsxwriter')
                 df.to_excel(writer,sheet_name='Elenco_tot', index=False)
                 writer.save()
+                writer.close()  # chiude l'oggetto writer
                 output.seek(0)
                 st.download_button(
                     label="Download Xlsx",
