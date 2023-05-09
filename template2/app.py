@@ -1,37 +1,52 @@
 import streamlit as st
 import numpy as np  
 import pandas as pd
-from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
+import joblib
+import io
 
 def main():
-    
-    st.title("Template")
-    df =pd.read_csv("Startup.csv")
-    st.write(df)
-    X = df.drop(columns="Profit")
-    y = df["Profit"]
-    model = LinearRegression(fit_intercept=True)
-    model.fit(X, y)
-    X_train, X_test, y_train, y_test = train_test_split(X, y, 
-                                                    test_size = 0.2, 
-                                                    random_state = 667
-                                                    )
-    y_pred = model.predict(X_test)
-    length = y_pred.shape[0] #  
-    x = np.linspace(0,length,length)
 
-    fig=plt.figure(figsize=(8,5))
-    plt.plot(x, y_test, label='real y')
-    plt.plot(x, y_pred, label="predicted y'")
-    plt.legend(loc=2)
-    st.write(fig)
+    st.title("Modello regressione lineare")
+    newmodel = joblib.load('Startup_3input.pkl')
     rd = st.number_input("R&D spend", value= 0.0)
     amm = st.number_input("administration", value=0.0)
     mark = st.number_input("Marketing", value=0.0)
-    res = model.predict([[rd, amm, mark]])[0]
-    st.write(f"predicted profit {round(res,1)}")
+    res = newmodel.predict([[rd, amm, mark]])[0]
+    st.write(f"Predicted profit {round(res,1)}$")
+
+
+    # Parte per caricare il file CSV o Excel
+    st.header("Caricamento dati")
+    file = st.file_uploader("Carica un file CSV o Excel", type=["csv", "xlsx"])
+    if file is not None:
+        if file.type.startswith('application/vnd.openxmlformats-officedocument.spreadsheetml'):
+            df = pd.read_excel(file, engine='openpyxl')
+        else:
+            df = pd.read_csv(file)
+        dfx = df.to_numpy()
+        # Mostra i dati caricati
+        st.write("Dati caricati:")
+        st.write(df)
+
+        # Previsione dei dati usando il modello di regressione lineare
+        st.header("Previsione dei dati")
+        predictions = newmodel.predict(dfx)
+        df['Predicted Profit'] = np.round(predictions, 1)
+        st.write("Risultati previsione:")
+        st.write(df)
+        # Aggiungi un pulsante per il download del file
+        output = io.BytesIO()
+        writer = pd.ExcelWriter(output, engine='xlsxwriter')
+        df.to_excel(writer,sheet_name='Profit_prediction', index=False)
+        writer.save()
+        output.seek(0)
+        st.download_button(
+            label="Scarica file Excel",
+            data=output,
+            file_name='Profit_prediction.xlsx',
+            mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        )
+
 if __name__ == "__main__":
     main()
