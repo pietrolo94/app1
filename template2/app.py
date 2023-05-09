@@ -26,7 +26,7 @@ def main():
     file = st.file_uploader("Carica un file CSV o Excel", type=["csv", "xlsx"])
     if file is not None:
         if file.type.startswith('application/vnd.openxmlformats-officedocument.spreadsheetml'):
-            df = pd.read_excel(file, engine='openpyxl')
+            df = pd.read_excel(file, engine='xlrd')
         else:
             df = pd.read_csv(file)
         dfx = df.to_numpy()
