@@ -9,6 +9,7 @@ import os
 def main():
 
     st.title("Modello regressione lineare")
+    #creare absolute path
     absolute_path = os.path.dirname(__file__)
     relative_path = "Startup_3input.pkl"
     full_path = os.path.join(absolute_path, relative_path)
