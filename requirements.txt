@@ -1,3 +1,5 @@
 streamlit
 xlsxwriter
 openpyxl
+pandas==1.5
+numpy
