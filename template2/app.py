@@ -15,8 +15,8 @@ def main():
     full_path = os.path.join(absolute_path, relative_path)
     newmodel = joblib.load(full_path)
     rd = st.number_input("R&D spend", value= 0.0)
-    amm = st.number_input("administration", value=0.0)
-    mark = st.number_input("Marketing", value=0.0)
+    amm = st.number_input("Administration cost", value=0.0)
+    mark = st.number_input("Marketing spend", value=0.0)
     res = newmodel.predict([[rd, amm, mark]])[0]
     st.write(f"Predicted profit {round(res,1)}$")
 
