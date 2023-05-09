@@ -8,7 +8,7 @@ import io
 def main():
 
     st.title("Modello regressione lineare")
-    newmodel = joblib.load('Startup_3input.pkl')
+    newmodel = joblib.load('./Startup_3input.pkl')
     rd = st.number_input("R&D spend", value= 0.0)
     amm = st.number_input("administration", value=0.0)
     mark = st.number_input("Marketing", value=0.0)
