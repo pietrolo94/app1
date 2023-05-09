@@ -4,11 +4,15 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import joblib
 import io
+import os
 
 def main():
 
     st.title("Modello regressione lineare")
-    newmodel = joblib.load('./Startup_3input.pkl')
+    absolute_path = os.path.dirname(__file__)
+    relative_path = "Startup_3input.pkl"
+    full_path = os.path.join(absolute_path, relative_path)
+    newmodel = joblib.load(full_path)
     rd = st.number_input("R&D spend", value= 0.0)
     amm = st.number_input("administration", value=0.0)
     mark = st.number_input("Marketing", value=0.0)
@@ -47,6 +51,7 @@ def main():
             file_name='Profit_prediction.xlsx',
             mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
         )
+        st.title("Sono un coglionazzo")
 
 if __name__ == "__main__":
     main()
