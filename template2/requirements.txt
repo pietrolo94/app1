@@ -4,3 +4,4 @@ scikit-learn
 xlsxwriter
 numpy
 matplotlib
+openpyxl
