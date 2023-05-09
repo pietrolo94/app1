@@ -1,6 +1,6 @@
 streamlit
-pandas
+pandas==1.5
 scikit-learn
-xlswriter
+xlsxwriter
 numpy
 matplotlib
