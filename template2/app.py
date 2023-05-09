@@ -29,29 +29,29 @@ def main():
             df = pd.read_excel(file, engine='openpyxl')
         else:
             df = pd.read_csv(file)
-            dfx = df.to_numpy()
-            # Mostra i dati caricati
-            st.write("Dati caricati:")
-            st.write(df)
+        dfx = df.to_numpy()
+        # Mostra i dati caricati
+        st.write("Dati caricati:")
+        st.write(df)
 
-            # Previsione dei dati usando il modello di regressione lineare
-            st.header("Previsione dei dati")
-            predictions = newmodel.predict(dfx)
-            df['Predicted Profit'] = np.round(predictions, 1)
-            st.write("Risultati previsione:")
-            st.write(df)
-            # Aggiungi un pulsante per il download del file
-            output = io.BytesIO()
-            writer = pd.ExcelWriter(output, engine='xlsxwriter')
-            df.to_excel(writer,sheet_name='Profit_prediction', index=False)
-            writer.save()
-            output.seek(0)
-            st.download_button(
-                label="Scarica file Excel",
-                data=output,
-                file_name='Profit_prediction.xlsx',
-                mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-        )
+        # Previsione dei dati usando il modello di regressione lineare
+        st.header("Previsione dei dati")
+        predictions = newmodel.predict(dfx)
+        df['Predicted Profit'] = np.round(predictions, 1)
+        st.write("Risultati previsione:")
+        st.write(df)
+        # Aggiungi un pulsante per il download del file
+        output = io.BytesIO()
+        writer = pd.ExcelWriter(output, engine='xlsxwriter')
+        df.to_excel(writer,sheet_name='Profit_prediction', index=False)
+        writer.save()
+        output.seek(0)
+        st.download_button(
+            label="Scarica file Excel",
+            data=output,
+            file_name='Profit_prediction.xlsx',
+            mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
     #fine
 if __name__ == "__main__":
     main()
